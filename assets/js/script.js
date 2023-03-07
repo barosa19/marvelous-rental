@@ -1,12 +1,11 @@
 var rentalArray;
 var zipTextElem = document.querySelector("#zipEntryText");
-// var zipSubmitElem = document.querySelector("#zipEntrySubmit");
 var zipFormElem = document.querySelector("#zipForm");
 
 // realtor API globals
 var realtorSearchType = "rentalListings";
 // note: I only have a limited number of uses of this API before I am charged.
-// I have saved the data that results from this fetch in exampleRentalObject.txt
+// I have saved the data that results from this fetch in rentalArray.js
 // var realtorAPIKey = 'rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a';
 var realtorCity = "";//"&city=Atlanta";
 var realtorState = "";//"&state=GA";
@@ -46,12 +45,6 @@ function getRentalData() {
     .catch(err => console.error(err));
 }
 
-function printRentalArray () {
-  // import {rentalArray} from './rentalArray.js'; 
-    console.log(tmpRentalArray);
-
-}
-  printRentalArray();
 
 //listen to submit button for zipcode search
 zipFormElem.addEventListener('submit', function (event){
@@ -60,6 +53,8 @@ zipFormElem.addEventListener('submit', function (event){
   if (+zipCodeText) {
     console.log("zip code entered was:");
     console.log(zipCodeText);
+    realtorZip = `&zipCode=${zipCodeText}`;
+    console.log("going to fetch with zip:", realtorZip);
     getRentalData();
     console.log(rentalArray);
   }
