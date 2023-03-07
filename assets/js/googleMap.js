@@ -4,9 +4,7 @@ var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?quer
 var bodyEl = document.querySelector('body')
 fetch(googleURL)
 .then(function (response) {
-
     return response.json()
-
 })
 .then(function (data) {
     console.log(data)
