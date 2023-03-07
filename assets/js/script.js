@@ -1,5 +1,7 @@
 var rentalArray;
-
+var zipTextElem = document.querySelector("#zipEntryText");
+// var zipSubmitElem = document.querySelector("#zipEntrySubmit");
+var zipFormElem = document.querySelector("#zipForm");
 
 // realtor API globals
 var realtorSearchType = "rentalListings";
@@ -11,9 +13,13 @@ var realtorState = "";//"&state=GA";
 var realtorZip = "&zipCode=30009";
 var realtorNumResults = "&limit=10";
 
-// realtor API fetch data
+// fetch realtor API data
 function getRentalData() {
-
+  // temporarily use tmpRentalArray
+  if (tmpRentalArray) {
+    rentalArray = tmpRentalArray;
+    return;
+  }
   const options = {
     method: 'GET',
     headers: {
@@ -21,11 +27,8 @@ function getRentalData() {
       'X-RapidAPI-Host': 'realty-mole-property-api.p.rapidapi.com'
     }
   };
-
-  var realtorAPIUrl = "https://realty-mole-property-api.p.rapidapi.com/rentalListings?rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a&zipCode=30009&status=Active&limit=10"
-
+  //fetch data from API
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
-    // .then(response => response.json())
     .then(function(response) {
       if (!response.ok) {
           console.log("error");
@@ -37,10 +40,10 @@ function getRentalData() {
       })
     .then(function (data) {
      //do stuff 
-     console.log ("can do stuff with data");
+     rentalArray = data;
+     console.log ("API successfully loaded into global rentalArray");
     })
     .catch(err => console.error(err));
-
 }
 
 function printRentalArray () {
@@ -49,3 +52,19 @@ function printRentalArray () {
 
 }
   printRentalArray();
+
+//listen to submit button for zipcode search
+zipFormElem.addEventListener('submit', function (event){
+  event.preventDefault();
+  var zipCodeText = zipTextElem.value;
+  if (+zipCodeText) {
+    console.log("zip code entered was:");
+    console.log(zipCodeText);
+    getRentalData();
+    console.log(rentalArray);
+  }
+  else {
+    console.log("not a number");
+  }
+});
+
