@@ -1,4 +1,4 @@
-[
+var tmpRentalArray = [
   {
     "addressLine1": "10105 Westside Pkwy",
     "formattedAddress": "10105 Westside Pkwy, Alpharetta, GA 30009",
@@ -222,4 +222,5 @@
     "latitude": 34.053685,
     "longitude": -84.299057
   }
-]
+];
+// module.exports [rentalArray];

@@ -1,6 +1,8 @@
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
 var googleMapsURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+toronto+canadakey=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&callback=initMap&libraries=places`
 var testURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+toronto+canada&key=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&libraries=places'
+var rentalArray;
+
 
 // realtor API globals
 var realtorSearchType = "rentalListings";
@@ -112,3 +114,10 @@ function initMap() {
   }
   
   window.initMap = initMap;
+
+function printRentalArray () {
+  // import {rentalArray} from './rentalArray.js'; 
+    console.log(tmpRentalArray);
+
+}
+  printRentalArray();
