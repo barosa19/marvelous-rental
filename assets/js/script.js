@@ -1,6 +1,7 @@
-var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
-var googleMapsURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+toronto+canadakey=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&callback=initMap&libraries=places`
-var testURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+toronto+canada&key=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&libraries=places'
+var rentalArray;
+var zipTextElem = document.querySelector("#zipEntryText");
+// var zipSubmitElem = document.querySelector("#zipEntrySubmit");
+var zipFormElem = document.querySelector("#zipForm");
 
 // realtor API globals
 var realtorSearchType = "rentalListings";
@@ -12,9 +13,13 @@ var realtorState = "";//"&state=GA";
 var realtorZip = "&zipCode=30009";
 var realtorNumResults = "&limit=10";
 
-// realtor API fetch data
+// fetch realtor API data
 function getRentalData() {
-
+  // temporarily use tmpRentalArray
+  if (tmpRentalArray) {
+    rentalArray = tmpRentalArray;
+    return;
+  }
   const options = {
     method: 'GET',
     headers: {
@@ -22,11 +27,8 @@ function getRentalData() {
       'X-RapidAPI-Host': 'realty-mole-property-api.p.rapidapi.com'
     }
   };
-
-  var realtorAPIUrl = "https://realty-mole-property-api.p.rapidapi.com/rentalListings?rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a&zipCode=30009&status=Active&limit=10"
-
+  //fetch data from API
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
-    // .then(response => response.json())
     .then(function(response) {
       if (!response.ok) {
           console.log("error");
@@ -38,77 +40,31 @@ function getRentalData() {
       })
     .then(function (data) {
      //do stuff 
-     console.log ("can do stuff with data");
+     rentalArray = data;
+     console.log ("API successfully loaded into global rentalArray");
     })
     .catch(err => console.error(err));
-
 }
 
+function printRentalArray () {
+  // import {rentalArray} from './rentalArray.js'; 
+    console.log(tmpRentalArray);
 
-fetch(testURL)
-.then(function (response) {
+}
+  printRentalArray();
 
-    return response.json()
-
-})
-.then(function (data) {
-    console.log(data)
-})
-
-function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: -33.8688, lng: 151.2195 },
-      zoom: 13,
-    });
-    const input = document.getElementById("pac-input");
-    // Specify just the place data fields that you need.
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-      fields: ["place_id", "geometry", "formatted_address", "name"],
-    });
-  
-    autocomplete.bindTo("bounds", map);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  
-    const infowindow = new google.maps.InfoWindow();
-    const infowindowContent = document.getElementById("infowindow-content");
-  
-    infowindow.setContent(infowindowContent);
-  
-    const marker = new google.maps.Marker({ map: map });
-  
-    marker.addListener("click", () => {
-      infowindow.open(map, marker);
-    });
-    autocomplete.addListener("place_changed", () => {
-      infowindow.close();
-  
-      const place = autocomplete.getPlace();
-  
-      if (!place.geometry || !place.geometry.location) {
-        return;
-      }
-  
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
-      }
-  
-      // Set the position of the marker using the place ID and location.
-      // @ts-ignore This should be in @typings/googlemaps.
-      marker.setPlace({
-        placeId: place.place_id,
-        location: place.geometry.location,
-      });
-      marker.setVisible(true);
-      infowindowContent.children.namedItem("place-name").textContent = place.name;
-      infowindowContent.children.namedItem("place-id").textContent =
-        place.place_id;
-      infowindowContent.children.namedItem("place-address").textContent =
-        place.formatted_address;
-      infowindow.open(map, marker);
-    });
+//listen to submit button for zipcode search
+zipFormElem.addEventListener('submit', function (event){
+  event.preventDefault();
+  var zipCodeText = zipTextElem.value;
+  if (+zipCodeText) {
+    console.log("zip code entered was:");
+    console.log(zipCodeText);
+    getRentalData();
+    console.log(rentalArray);
   }
-  
-  window.initMap = initMap;
+  else {
+    console.log("not a number");
+  }
+});
+
