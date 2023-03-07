@@ -22,30 +22,42 @@
         <h2>Enter your zipcode:</h2>
         <input type="text" id="zipEntryText" maxlength="5">
         <input type="submit" id="zipEntrySubmit" value="Find Furniture">
-    </form>
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        </head>
 
-    <div class="output-rows">
-        <div class="houses">
-            <h2> Houses will be displayed here</h2>
+        <body>
+            <header class="header">
+                <h1 id="title"><span>Marvelous Rentals</span></h2>
+            </header>
+
+            <form class="form">
+                <h2>Enter your zipcode:</h2>
+                <input type="text" id="zipEntryText" maxlength="5">
+                <input type="submit" id="zipEntrySubmit" value="Find Furniture">
+            </form>
+
+            <div class="output-rows">
+                <div class="houses">
+                    <h2> Houses will be displayed here</h2>
 
 
-        </div>
-        <div class="map">
-            <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
-            <div id="map"></div>
-        </div>
-        <div class="furniture">
-            <h2> Furniture will be listed here</h2>
+                </div>
+                <div class="map">
+                    <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+                    <div id="map"></div>
+                </div>
+                <div class="furniture">
+                    <h2> Furniture will be listed here</h2>
 
-        </div>
-    </div>
-    </div>
-    <script src="./assets/js/rentalArray.js"></script>
-    <script src="./assets/js/script.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
-        defer></script>
-    <script src="./assets/js/googleMap.js"></script>
-</body>
+                </div>
+            </div>
+            </div>
+            <script src="./assets/js/rentalArray.js"></script>
+            <script src="./assets/js/script.js"></script>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+                defer></script>
+            <script src="./assets/js/googleMap.js"></script>
+        </body>
 
 </html>
