@@ -1,0 +1,68 @@
+body {
+    background-color: bisque;
+}
+
+.title {
+    text-align: center;
+    background-color: red;
+    border: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    border-color: black;
+    padding: 8px;
+}
+
+.subtitle {
+    text-align: center;
+}
+
+#stores-list {
+    float: right;
+    margin-left: 25px;
+}
+
+#apartments-list {
+    float: left;
+    margin-left: 25px;
+}
+
+#main-map {
+    float: center;
+    margin-left: 25px;
+}
+
+.float-right {
+    margin-right: 0px;
+    padding: 100px;
+    clear: both;
+    text-align: center;
+    float: right;
+    width: 20%;
+    height: 100%;
+    background-color: red;
+    color: white
+}
+
+.float-left {
+    margin-left: 0px;
+    padding: 100px;
+    clear: both;
+    text-align: center;
+    float: left;
+    width: 20%;
+    height: 100%;
+    background-color: red;
+    color: white
+}
+
+.float-bottom {
+    margin-right: 480px;
+    padding: 100px;
+    clear: both;
+    text-align: center;
+    float: right;
+    width: 20%;
+    height: 100%;
+    background-color: red;
+    color: white
+}

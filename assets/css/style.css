@@ -1,63 +1,58 @@
-body {
-    background-color: bisque;
+* {
+    background-color: aliceblue;
 }
 
-.title {
-    text-align: center;
-
+.form {
+    margin-bottom: 20px;
 }
 
-.subtitle {
-    text-align: center;
-}
-
-#stores-list {
-    float: right;
-    margin-left: 25px;
-}
-
-#apartments-list {
+.houses,
+.furniture,
+.map {
     float: left;
-    margin-left: 25px;
-}
-
-#main-map {
-    float: center;
-    margin-left: 25px;
-}
-
-.float-right {
-    margin-right: 0px;
-    padding: 100px;
-    clear: both;
+    height: 500px;
     text-align: center;
-    float: right;
-    width: 20%;
-    height: 100%;
-    background-color: red;
-    color: white
+    border: solid;
+    border-color: blue;
 }
 
-.float-left {
-    margin-left: 0px;
-    padding: 100px;
-    clear: both;
-    text-align: center;
-    float: left;
+.houses,
+.furniture {
     width: 20%;
-    height: 100%;
-    background-color: red;
-    color: white
 }
 
-.float-bottom {
-    margin-right: 480px;
-    padding: 100px;
-    clear: both;
+.map {
+    width: 50%;
+}
+
+#title {
+    align-items: center;
     text-align: center;
-    float: right;
-    width: 20%;
-    height: 100%;
+    color: white;
+    font-family: 'Fakt Pro', sans-serif;
+}
+
+#title span {
     background-color: red;
-    color: white
+    border: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    border-color: black;
+    padding: 8px;
+}
+
+#zipEntryText {
+    background-color: rgb(237, 237, 237);
+}
+
+#zipEntrySubmit {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
+
+#zipEntrySubmit:hover {
+    color: black;
+    background-color: greenyellow;
+    cursor: pointer;
 }
