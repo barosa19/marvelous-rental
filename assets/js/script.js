@@ -49,8 +49,6 @@ function getRentalData() {
     .catch(err => console.error(err));
 }
 
-// BRUNOS CODE WAS HERE
-
 //listen to submit button for zipcode search
 zipFormElem.addEventListener('submit', function (event){
   event.preventDefault();
