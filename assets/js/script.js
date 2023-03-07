@@ -1,7 +1,8 @@
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
-var googleMapsURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+toronto+canadakey=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&callback=initMap&libraries=places`
-var testURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+toronto+canada&key=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&libraries=places'
-
+var zipcode = 34120
+var testURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${zipcode}&key=${googleMapsAPI}&libraries=places`
+var testPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=Aap_uEA7vb0DDYVJWEaX3O-AtYp77AaswQKSGtDaimt3gt7QCNpdjp1BkdM6acJ96xTec3tsV_ZJNL_JP-lqsVxydG3nh739RE_hepOOL05tfJh2_ranjMadb3VoBYFvF0ma6S24qZ6QJUuV6sSRrhCskSBP5C1myCzsebztMfGvm7ij3gZT&key=${googleMapsAPI}`
+var bodyEl = document.querySelector('body')
 fetch(testURL)
 .then(function (response) {
 
@@ -10,62 +11,98 @@ fetch(testURL)
 })
 .then(function (data) {
     console.log(data)
-})
+    var listings = data.results
+    var firstBusiness = listings[5]
+    console.log(firstBusiness)
+    var firstName = firstBusiness.name
+    bodyEl.innerHTML += `<h1> ${firstName} </h1>`
+    console.log(firstBusiness)
+    var firstAddress = firstBusiness.formatted_address
+    bodyEl.innerHTML += `<h3> ${firstAddress} </h3>`
+    var firstImage = firstBusiness.photos[0].photo_reference
+    var testPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${firstImage}&key=${googleMapsAPI}`
+    console.log(firstImage)
+    bodyEl.innerHTML += `<img src=${testPhoto} />`
+    
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: -33.8688, lng: 151.2195 },
-      zoom: 13,
+results[9].photos[0].html_attributions[0]
+'<a href="https://maps.google.com/maps/contrib/103363594491153903843">Todd Macchi</a>'
+
+})
+function initAutocomplete() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -33.8688, lng: 151.2195 },
+    zoom: 13,
+    mapTypeId: "roadmap",
+  });
+  // Create the search box and link it to the UI element.
+  const input = document.getElementById("pac-input");
+  const searchBox = new google.maps.places.SearchBox(input);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  let markers = [];
+
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener("places_changed", () => {
+    const places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach((marker) => {
+      marker.setMap(null);
     });
-    const input = document.getElementById("pac-input");
-    // Specify just the place data fields that you need.
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-      fields: ["place_id", "geometry", "formatted_address", "name"],
-    });
-  
-    autocomplete.bindTo("bounds", map);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  
-    const infowindow = new google.maps.InfoWindow();
-    const infowindowContent = document.getElementById("infowindow-content");
-  
-    infowindow.setContent(infowindowContent);
-  
-    const marker = new google.maps.Marker({ map: map });
-  
-    marker.addListener("click", () => {
-      infowindow.open(map, marker);
-    });
-    autocomplete.addListener("place_changed", () => {
-      infowindow.close();
-  
-      const place = autocomplete.getPlace();
-  
+    markers = [];
+
+    // For each place, get the icon, name and location.
+    const bounds = new google.maps.LatLngBounds();
+
+    places.forEach((place) => {
       if (!place.geometry || !place.geometry.location) {
+        console.log("Returned place contains no geometry");
         return;
       }
-  
+
+      const icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25),
+      };
+
+      // Create a marker for each place.
+      markers.push(
+        new google.maps.Marker({
+          map,
+          icon,
+          title: place.name,
+          position: place.geometry.location,
+        })
+      );
       if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
       } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
+        bounds.extend(place.geometry.location);
       }
-  
-      // Set the position of the marker using the place ID and location.
-      // @ts-ignore This should be in @typings/googlemaps.
-      marker.setPlace({
-        placeId: place.place_id,
-        location: place.geometry.location,
-      });
-      marker.setVisible(true);
-      infowindowContent.children.namedItem("place-name").textContent = place.name;
-      infowindowContent.children.namedItem("place-id").textContent =
-        place.place_id;
-      infowindowContent.children.namedItem("place-address").textContent =
-        place.formatted_address;
-      infowindow.open(map, marker);
     });
-  }
-  
-  window.initMap = initMap;
+    map.fitBounds(bounds);
+  });
+}
+window.initAutocomplete = initAutocomplete;
+
