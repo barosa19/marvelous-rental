@@ -1,6 +1,3 @@
-var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
-var googleMapsURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+toronto+canadakey=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&callback=initMap&libraries=places`
-var testURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+toronto+canada&key=AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk&libraries=places'
 var rentalArray;
 var zipTextElem = document.querySelector("#zipEntryText");
 // var zipSubmitElem = document.querySelector("#zipEntrySubmit");
@@ -49,6 +46,13 @@ function getRentalData() {
     .catch(err => console.error(err));
 }
 
+function printRentalArray () {
+  // import {rentalArray} from './rentalArray.js'; 
+    console.log(tmpRentalArray);
+
+}
+  printRentalArray();
+
 //listen to submit button for zipcode search
 zipFormElem.addEventListener('submit', function (event){
   event.preventDefault();
@@ -63,3 +67,4 @@ zipFormElem.addEventListener('submit', function (event){
     console.log("not a number");
   }
 });
+
