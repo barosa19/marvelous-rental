@@ -1,0 +1,50 @@
+* {
+    background-color:aliceblue;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.houses, .furniture, .map {
+    float: left;
+    height: 500px;
+    text-align: center;
+    border:solid;
+    border-color: blue;
+}
+.houses, .furniture {
+    width: 20%;
+  }
+  
+.map {
+    width: 50%;
+  }   
+
+#title {
+    align-items:center;
+    text-align:center;
+    color:white;
+    font-family: 'Fakt Pro', sans-serif;
+}
+#title span {
+    background-color: red;
+    border:solid;
+    border-width: 5px;
+    border-radius: 10px;
+    border-color: black;
+    padding: 8px;
+}
+#zipEntryText{
+    background-color: rgb(237, 237, 237);
+}
+#zipEntrySubmit{
+    background-color: blue;
+    color:white;
+    font-weight: bold;
+}
+#zipEntrySubmit:hover{
+    color: black;
+    background-color: greenyellow;
+    cursor: pointer;
+}
