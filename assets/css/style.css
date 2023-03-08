@@ -13,7 +13,7 @@ body {
 
 }
 
-#output-rows{
+.output-rows{
     display:flex;
     width: 100%;
 }
@@ -30,10 +30,11 @@ body {
     overflow-y:scroll;
   }
   .map {
-    width:100%;
+    width:50%;
   }
+
 @media all and (max-width: 600px){
-    #output-rows{
+    .output-rows{
         flex-wrap:wrap;
         height: 200px;
     }
