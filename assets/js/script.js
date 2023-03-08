@@ -10,7 +10,7 @@ var realtorSearchType = "rentalListings";
 // var realtorAPIKey = 'rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a';
 var realtorCity = "";//"&city=Atlanta";
 var realtorState = "";//"&state=GA";
-var realtorZip = "&zipCode=30009";
+var realtorZip = "" ; // "&zipCode=30009"
 var realtorNumResults = "&limit=10";
 
 // fetch realtor API data
@@ -70,7 +70,7 @@ function displayRentalData() {
     cardSection.setAttribute("class", "card-section");
     cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
-    var curAddress = `"${r.addressLine1}"<br>"${r.city}, ${r.state} ${r.zipCode}"`;
+    var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     console.log("current address is:", curAddress);
     cardSection.innerHTML = curAddress;
     //create card-stats
@@ -121,6 +121,7 @@ zipFormElem.addEventListener('submit', function (event){
     saveRentalData();
     displayRentalData();
     console.log(rentalArray);
+    loadGoogle(realtorZip);
     
   }
   else {
