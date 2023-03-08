@@ -149,6 +149,7 @@ zipFormElem.addEventListener('submit', function (event){
         displayRentalData();
         console.log(rentalArray);
         loadGoogle(realtorZip);
+        printGoogle();
     //this section should be deleted after fetch is active
     
   }
