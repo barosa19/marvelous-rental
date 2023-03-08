@@ -59,7 +59,7 @@ body {
 @media all and (max-width: 600px) {
     #output-rows {
         flex-wrap: wrap;
-        =======overflow-y: scroll;
+        overflow-y: scroll;
     }
 
     .map {
@@ -69,7 +69,7 @@ body {
     @media all and (max-width: 600px) {
         .output-rows {
             flex-wrap: wrap;
-            >>>>>>>d1f130e3ef912ad9eadb0d85b3e0540f527d5f40 height: 200px;
+            height: 200px;
         }
 
         .map {
