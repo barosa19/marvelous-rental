@@ -1,8 +1,10 @@
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
-var googleZipcode = realtorZip.split("=")[1]
-console.log (googleZipcode)
+var googleZipcode = 30318
+
+
 var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${googleZipcode}&key=${googleMapsAPI}&libraries=places`
 var furnitureEl = document.querySelector('.furniture')
+
 fetch(googleURL)
 .then(function (response) {
     return response.json()
@@ -10,17 +12,19 @@ fetch(googleURL)
 .then(function (data) {
   
     var listings = data.results
-    for (i = 0; i < 1 ; i++){
+    for (i = 0; i < 10 ; i++){
     var furnitureList = listings[i]
     console.log(furnitureList)
     var storeName = furnitureList.name
     furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
     var storeAddress = furnitureList.formatted_address
     furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
-    var storePhotoref = furnitureList.photos[0].photo_reference
-    var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
-    console.log(storeImg)
-    furnitureEl.innerHTML += `<img src=${storeImg} />`  
+    if (furnitureList.photos !== undefined){
+      var storePhotoref = furnitureList.photos[0].photo_reference
+      var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
+      console.log(storeImg)
+      furnitureEl.innerHTML += `<img src=${storeImg} />`  
+    } 
     }
 })
 function initAutocomplete() {

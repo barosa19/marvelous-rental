@@ -56,9 +56,6 @@ function saveRentalData() {
   
 }
 
-function getZip () {
-  return realtorZip;
-}
 
 //load rental data from rentalArray into side bar
 function displayRentalData() {
