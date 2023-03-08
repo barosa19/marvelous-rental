@@ -71,75 +71,77 @@ body {
             order: 2;
         }
     }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        margin: 5px;
-        border: 0.3rem solid blue;
-
-    }
-
-    .card-section {
-        padding: 0.3rem;
-    }
-
-    .card-img {
-        width: 40%;
-        padding: 0.3rem;
-    }
-
-    .card-address {
-        font-size: 1rem;
-    }
-
-    .card-info {
-        padding: 0.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+}
 
 
-    .card-stats {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    border: 0.3rem solid blue;
 
-    #title {
-        align-items: center;
-        text-align: center;
-        color: white;
-        font-family: 'Fakt Pro', sans-serif;
-        text-align: center;
-        color: white;
-        font-family: 'Fakt Pro', 'sans-serif';
+}
 
-    }
+.card-section {
+    padding: 0.3rem;
+}
 
-    #title span {
-        background-color: red;
-        border: solid;
-        border-width: 5px;
-        border-radius: 10px;
-        border-color: black;
-        padding: 8px;
-    }
+.card-img {
+    width: 40%;
+    padding: 0.3rem;
+}
 
-    #zipEntryText {
-        background-color: rgb(237, 237, 237);
-    }
+.card-address {
+    font-size: 1rem;
+}
 
-    #zipEntrySubmit {
-        background-color: blue;
-        color: white;
-        font-weight: bold;
-    }
+.card-info {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    #zipEntrySubmit:hover {
-        color: black;
-        background-color: greenyellow;
-        cursor: pointer;
-    }
+
+.card-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#title {
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-family: 'Fakt Pro', sans-serif;
+    text-align: center;
+    color: white;
+    font-family: 'Fakt Pro', 'sans-serif';
+
+}
+
+#title span {
+    background-color: red;
+    border: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    border-color: black;
+    padding: 8px;
+}
+
+#zipEntryText {
+    background-color: rgb(237, 237, 237);
+}
+
+#zipEntrySubmit {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
+
+#zipEntrySubmit:hover {
+    color: black;
+    background-color: greenyellow;
+    cursor: pointer;
+}
