@@ -70,7 +70,7 @@ function displayRentalData() {
     cardSection.setAttribute("class", "card-section");
     cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
-    var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
+    var curAddress = `${r.addressLine1} <hr> ${r.city}, ${r.state} ${r.zipCode}`;
     console.log("current address is:", curAddress);
     cardSection.textContent = curAddress;
     //create card-stats
