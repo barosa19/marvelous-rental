@@ -1,25 +1,57 @@
 * {
     background-color:aliceblue;
 }
-
+body { 
+    height: 100%;
+    margin: 0;
+}
 .form {
     margin-bottom: 20px;
+    background-color: white;
+    border: solid;
+
+
+}
+
+#output-rows{
+    display:flex;
+    width: 100%;
 }
 
 .houses, .furniture, .map {
     float: left;
     height: 500px;
     text-align: center;
-    border:solid;
-    border-color: blue;
+    outline-style:solid;
+    outline-color: blue;
 }
 .houses, .furniture {
-    width: 20%;
+    width: 25%;
+    overflow-y:scroll;
   }
+  .map {
+    width:100%;
+  }
+@media all and (max-width: 600px){
+    #output-rows{
+        flex-wrap:wrap;
+        height: 200px;
+    }
+    .map {
+    width: 100%;
+    order:3;
+  }  
   
-.map {
-    width: 50%;
-  }   
+  .houses{
+    width:50%;
+    order:1;
+  } 
+  
+  .furniture {
+    width:50%;
+    order:2;
+  }
+}
 
 .card {
     display: flex;
@@ -65,7 +97,7 @@
     align-items:center;
     text-align:center;
     color:white;
-    font-family: 'Fakt Pro', sans-serif;
+    font-family: 'Fakt Pro', 'sans-serif';
 }
 #title span {
     background-color: red;
