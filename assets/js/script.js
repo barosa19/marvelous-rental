@@ -57,9 +57,6 @@ function saveRentalData() {
   
 }
 
-// function getZip () {
-//   return realtorZip;
-// }
 
 //load rental data from rentalArray into side bar
 function displayRentalData() {
@@ -120,8 +117,7 @@ zipFormElem.addEventListener('submit', function (event){
     saveRentalData();
     displayRentalData();
     console.log(rentalArray);
-    console.log("calling googlemapsstuff");
-    getGoogleAPI(realtorZip); //
+    
   }
   else {
     console.log("not a number");
