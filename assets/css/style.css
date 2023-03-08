@@ -15,7 +15,7 @@ body {
 
 }
 
-#output-rows {
+.output-rows {
     display: flex;
     width: 100%;
 }
@@ -33,7 +33,7 @@ body {
 .houses,
 .furniture {
     width: 25%;
-    overflow-y: scroll;
+    <<<<<<< HEAD overflow-y: scroll;
 }
 
 .map {
@@ -43,93 +43,103 @@ body {
 @media all and (max-width: 600px) {
     #output-rows {
         flex-wrap: wrap;
-        height: 200px;
+        =======overflow-y: scroll;
     }
 
     .map {
-        width: 100%;
-        order: 3;
-    }
-
-    .houses {
         width: 50%;
-        order: 1;
     }
 
-    .furniture {
-        width: 50%;
-        order: 2;
+    @media all and (max-width: 600px) {
+        .output-rows {
+            flex-wrap: wrap;
+            >>>>>>>d1f130e3ef912ad9eadb0d85b3e0540f527d5f40 height: 200px;
+        }
+
+        .map {
+            width: 100%;
+            order: 3;
+        }
+
+        .houses {
+            width: 50%;
+            order: 1;
+        }
+
+        .furniture {
+            width: 50%;
+            order: 2;
+        }
     }
-}
 
-.card {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    border: 0.3rem solid blue;
+    .card {
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+        border: 0.3rem solid blue;
 
-}
+    }
 
-.card-section {
-    padding: 0.3rem;
-}
+    .card-section {
+        padding: 0.3rem;
+    }
 
-.card-img {
-    width: 40%;
-    padding: 0.3rem;
-}
+    .card-img {
+        width: 40%;
+        padding: 0.3rem;
+    }
 
-.card-address {
-    font-size: 1rem;
-}
+    .card-address {
+        font-size: 1rem;
+    }
 
-.card-info {
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .card-info {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
 
-.card-stats {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
+    .card-stats {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
 
-#title {
-    align-items: center;
-    text-align: center;
-    color: white;
-    font-family: 'Fakt Pro', sans-serif;
-    text-align: center;
-    color: white;
-    font-family: 'Fakt Pro', 'sans-serif';
+    #title {
+        align-items: center;
+        text-align: center;
+        color: white;
+        font-family: 'Fakt Pro', sans-serif;
+        text-align: center;
+        color: white;
+        font-family: 'Fakt Pro', 'sans-serif';
 
-}
+    }
 
-#title span {
-    background-color: red;
-    border: solid;
-    border-width: 5px;
-    border-radius: 10px;
-    border-color: black;
-    padding: 8px;
-}
+    #title span {
+        background-color: red;
+        border: solid;
+        border-width: 5px;
+        border-radius: 10px;
+        border-color: black;
+        padding: 8px;
+    }
 
-#zipEntryText {
-    background-color: rgb(237, 237, 237);
-}
+    #zipEntryText {
+        background-color: rgb(237, 237, 237);
+    }
 
-#zipEntrySubmit {
-    background-color: blue;
-    color: white;
-    font-weight: bold;
-}
+    #zipEntrySubmit {
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+    }
 
-#zipEntrySubmit:hover {
-    color: black;
-    background-color: greenyellow;
-    cursor: pointer;
-}
+    #zipEntrySubmit:hover {
+        color: black;
+        background-color: greenyellow;
+        cursor: pointer;
+    }
