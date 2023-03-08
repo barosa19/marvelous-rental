@@ -1,26 +1,31 @@
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
-var zipcode = 34120
-var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${zipcode}&key=${googleMapsAPI}&libraries=places`
-var bodyEl = document.querySelector('body')
+var googleZipcode = 30318
+
+
+var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${googleZipcode}&key=${googleMapsAPI}&libraries=places`
+var furnitureEl = document.querySelector('.furniture')
+
 fetch(googleURL)
 .then(function (response) {
     return response.json()
 })
 .then(function (data) {
-    console.log(data)
+  
     var listings = data.results
-    var firstBusiness = listings[5]
-    console.log(firstBusiness)
-    var firstName = firstBusiness.name
-    bodyEl.innerHTML += `<h1> ${firstName} </h1>`
-    console.log(firstBusiness)
-    var firstAddress = firstBusiness.formatted_address
-    bodyEl.innerHTML += `<h3> ${firstAddress} </h3>`
-    var firstImage = firstBusiness.photos[0].photo_reference
-    var testPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${firstImage}&key=${googleMapsAPI}`
-    console.log(firstImage)
-    bodyEl.innerHTML += `<img src=${testPhoto} />`  
-
+    for (i = 0; i < 10 ; i++){
+    var furnitureList = listings[i]
+    console.log(furnitureList)
+    var storeName = furnitureList.name
+    furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
+    var storeAddress = furnitureList.formatted_address
+    furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
+    if (furnitureList.photos !== undefined){
+      var storePhotoref = furnitureList.photos[0].photo_reference
+      var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
+      console.log(storeImg)
+      furnitureEl.innerHTML += `<img src=${storeImg} />`  
+    } 
+    }
 })
 function initAutocomplete() {
   const map = new google.maps.Map(document.getElementById("map"), {
