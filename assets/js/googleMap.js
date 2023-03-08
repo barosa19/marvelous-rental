@@ -24,6 +24,9 @@ fetch(googleURL)
       var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
       console.log(storeImg)
       furnitureEl.innerHTML += `<img src=${storeImg} />`  
+    }
+    else{
+      furnitureEl.innerHTML += `<img src="./assets/icons/new-store.png"/>`
     } 
     }
 })
