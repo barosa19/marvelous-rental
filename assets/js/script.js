@@ -57,6 +57,7 @@ zipFormElem.addEventListener('submit', function (event){
     console.log("going to fetch with zip:", realtorZip);
     getRentalData();
     console.log(rentalArray);
+    
   }
   else {
     console.log("not a number");
