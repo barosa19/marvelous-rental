@@ -45,6 +45,26 @@ function getRentalData() {
     .catch(err => console.error(err));
 }
 
+//save rental data to local storage
+function saveRentalData() {
+  if (rentalArray) {
+    localStorage.setItem("rental-array", JSON.stringify(rentalArray));
+    console.log("rentalArray stored in rental-array");
+  } else {
+    console.log("error in rentalArray");
+  }
+  
+}
+
+function getZip () {
+  return realtorZip;
+}
+
+//load rental data from rentalArray into side bar
+function displayRentalData() {
+  //load rental 
+}
+
 
 //listen to submit button for zipcode search
 zipFormElem.addEventListener('submit', function (event){
@@ -56,6 +76,8 @@ zipFormElem.addEventListener('submit', function (event){
     realtorZip = `&zipCode=${zipCodeText}`;
     console.log("going to fetch with zip:", realtorZip);
     getRentalData();
+    saveRentalData();
+    displayRentalData();
     console.log(rentalArray);
     
   }
