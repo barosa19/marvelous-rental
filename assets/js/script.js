@@ -70,9 +70,9 @@ function displayRentalData() {
     cardSection.setAttribute("class", "card-section");
     cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
-    var curAddress = `${r.addressLine1} <hr> ${r.city}, ${r.state} ${r.zipCode}`;
+    var curAddress = `"${r.addressLine1}"<br>"${r.city}, ${r.state} ${r.zipCode}"`;
     console.log("current address is:", curAddress);
-    cardSection.textContent = curAddress;
+    cardSection.innerHTML = curAddress;
     //create card-stats
     var cardStats = document.createElement("div");
     cardStats.setAttribute("class", "card-stats");
@@ -87,12 +87,16 @@ function displayRentalData() {
     //create BR and BA
     var bR = document.createElement("p");
     bR.setAttribute("id", "br00");
+    bR.textContent = `BR: ${r.bedrooms}`;
     var bA = document.createElement("p");
     bA.setAttribute("id", "ba00");
+    bA.textContent = `BA: ${r.bathrooms}`;
     //add br and ba to card-info
-    cardInfo.appendChild(bR, bA);
+    cardInfo.appendChild(bR);
+    cardInfo.appendChild(bA)
     //add card-img and card-ingo to card-stats
-    cardStats.appendChild(cardImg, cardInfo);
+    cardStats.appendChild(cardImg);
+    cardStats.appendChild(cardInfo);
     //add card-stats to card-section
     cardSection.appendChild(cardStats);
     //add card-section to card
