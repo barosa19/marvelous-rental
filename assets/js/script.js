@@ -7,19 +7,22 @@ var rentalElem = document.querySelector(".houses");
 var realtorSearchType = "rentalListings";
 // note: I only have a limited number of uses of this API before I am charged.
 // I have saved the data that results from this fetch in rentalArray.js
-// var realtorAPIKey = 'rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a';
+var realtorAPIKey = 'rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a';
 var realtorCity = "";//"&city=Atlanta";
 var realtorState = "";//"&state=GA";
 var realtorZip = "" ; // "&zipCode=30009"
 var realtorNumResults = "&limit=10";
 
 // fetch realtor API data
-function getRentalData() {
+function fetchRentalData() {
+
   // temporarily use tmpRentalArray
   if (tmpRentalArray) {
     rentalArray = tmpRentalArray;
     return;
   }
+  // the above should be removed when we're live with fetch
+
   const options = {
     method: 'GET',
     headers: {
@@ -28,6 +31,7 @@ function getRentalData() {
     }
   };
   //fetch data from API
+  console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
     .then(function(response) {
       if (!response.ok) {
@@ -41,7 +45,14 @@ function getRentalData() {
     .then(function (data) {
      //do stuff 
      rentalArray = data;
+     console.log(data);
      console.log ("API successfully loaded into global rentalArray");
+     
+     //save new array
+     saveRentalData();
+     displayRentalData();
+     console.log(rentalArray);
+     loadGoogle(realtorZip);
     })
     .catch(err => console.error(err));
 }
@@ -54,13 +65,12 @@ function saveRentalData() {
   } else {
     console.log("error in rentalArray");
   }
-  
 }
-
 
 //load rental data from rentalArray into side bar
 function displayRentalData() {
   //go through rental object and create cards for each element in array
+  rentalElem.textContent = "";
   for (var i=0;i<rentalArray.length;i++){
     //create card
     var cardDiv = document.createElement("div");
@@ -71,7 +81,7 @@ function displayRentalData() {
     cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
-    console.log("current address is:", curAddress);
+    // console.log("current address is:", curAddress);
     cardSection.innerHTML = curAddress;
     //create card-stats
     var cardStats = document.createElement("div");
@@ -107,6 +117,22 @@ function displayRentalData() {
   
 }
 
+//load rentaldata from local storage, if any
+function loadRentalData () {
+  //load previous fetch objects from localStorage
+  rentalArray = localStorage.getItem('rental-array');
+  //if we have stored content, load it
+  if (rentalArray) {
+    console.log("loading stored data");
+    rentalArray = JSON.parse(rentalArray);
+    displayRentalData();
+    // loadGoogle(realtorZip);
+  } else {
+    console.log("no data in localStorage");
+  }
+
+}
+
 
 //listen to submit button for zipcode search
 zipFormElem.addEventListener('submit', function (event){
@@ -117,12 +143,14 @@ zipFormElem.addEventListener('submit', function (event){
     console.log(zipCodeText);
     realtorZip = `&zipCode=${zipCodeText}`;
     console.log("going to fetch with zip:", realtorZip);
-    getRentalData();
-    saveRentalData();
-    displayRentalData();
-    console.log(rentalArray);
-    loadGoogle(realtorZip);
-    printGoogle();
+    fetchRentalData();
+    //temporary save and load location
+        saveRentalData();
+        displayRentalData();
+        console.log(rentalArray);
+        loadGoogle(realtorZip);
+        printGoogle();
+    //this section should be deleted after fetch is active
     
   }
   else {
@@ -130,3 +158,4 @@ zipFormElem.addEventListener('submit', function (event){
   }
 });
 
+loadRentalData();
