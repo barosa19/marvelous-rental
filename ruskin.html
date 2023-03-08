@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="/assets/css/ruskin.css">
 
+    <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
+    <!-- <link rel="stylesheet" href="./assets/css/map.css" /> -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+
 </head>
 
 <body>
@@ -16,7 +22,8 @@
     </header>
     <section class="map-here">
         Map will go inside here
-        <div>
+
+        <div id="map">
         </div>
         <div class="search-bar">
             <input class="search" placeholder="Enter an address, neighborhood, city, or ZIP code">
@@ -31,6 +38,21 @@
                 <a href="#" class="next round">&#8250;</a>
                 <div id="houses-container" class="houses-list"></div>
 
+                <!-- start jamin's temp rental card -->
+                <div class="card">
+                    <div id="address00" class="card-section">10105 Westside Pkwy<br>Alpharetta, GA 30009
+                        <div class="card-stats">
+                            <img class="card-img" src="https://placehold.it/350x300" alt="image" />
+                            <div class="card-info">
+                                <p id="br00">BR: 1</p>
+                                <p id="ba00">BA: 1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end jamin's temp rental card -->
+
+
             </section>
             <section class="options-box">
                 <h1>Your Stores</h1>
@@ -44,6 +66,15 @@
         </div>
 
     </main>
+
+
+    <script src="./assets/js/rentalArray.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+        defer></script>
+    <script src="./assets/js/googleMap.js"></script>
+
 
 </body>
 

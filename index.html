@@ -22,42 +22,40 @@
         <h2>Enter your zipcode:</h2>
         <input type="text" id="zipEntryText" maxlength="5">
         <input type="submit" id="zipEntrySubmit" value="Find Furniture">
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        </head>
+    </form>
 
-        <body>
-            <header class="header">
-                <h1 id="title"><span>Marvelous Rentals</span></h2>
-            </header>
-
-            <form class="form">
-                <h2>Enter your zipcode:</h2>
-                <input type="text" id="zipEntryText" maxlength="5">
-                <input type="submit" id="zipEntrySubmit" value="Find Furniture">
-            </form>
-
-            <div class="output-rows">
-                <div class="houses">
-                    <h2> Houses will be displayed here</h2>
-
-
-                </div>
-                <div class="map">
-                    <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
-                    <div id="map"></div>
-                </div>
-                <div class="furniture">
-                    <h2> Furniture will be listed here</h2>
-
+    <div class="output-rows">
+        <div class="houses ">
+            <!-- <h2> Houses will be displayed here</h2> -->
+            <!-- start jamin's temp rental card -->
+            <div class="card">
+                <div id="address00" class="card-section">10105 Westside Pkwy<br>Alpharetta, GA 30009
+                    <div class="card-stats">
+                        <img class="card-img" src="https://placehold.it/350x300" alt="image" />
+                        <div class="card-info">
+                            <p id="br00">BR: 1</p>
+                            <p id="ba00">BA: 1</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            <script src="./assets/js/rentalArray.js"></script>
-            <script src="./assets/js/script.js"></script>
-            <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
-                defer></script>
-            <script src="./assets/js/googleMap.js"></script>
-        </body>
+            <!-- end jamin's temp rental card -->
+        </div>
+        <div class="map">
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+            <div id="map"></div>
+        </div>
+        <div class="furniture">
+            <h2> Furniture will be listed here</h2>
+
+        </div>
+    </div>
+    <script src="./assets/js/rentalArray.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+        defer></script>
+    <script src="./assets/js/googleMap.js"></script>
+</body>
 
 </html>
