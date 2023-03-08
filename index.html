@@ -7,6 +7,8 @@
     <title>Document</title>
     <link href="https://fonts.cdnfonts.com/css/fakt-pro" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/map.css"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
     <header class = "header">
@@ -20,48 +22,31 @@
     <input type = "submit" id = "zipEntrySubmit" value ="Find Furniture">
     </form>
 
+
 <div id="output-rows">
         <div class="houses">
                 <h2> Houses will be displayed here</h2>
-                <li>House image house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li><li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-
-                <li>house price</li><li>house price</li>
-                <li>house price</li><li>house price</li><li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-                <li>house price</li>
-
-            
         </div>
         <div class="map">
-            <h2>The map will be here</h2>
+          <input
+          id="pac-input"
+          class="controls"
+          type="text"
+          placeholder="Search Box"
+        />
+        <div id="map"></div>
         </div>
         <div class="furniture">
             <h2> Furniture will be listed here</h2>
         
         </div>
 </div>
-
+    <script src="./assets/js/rentalArray.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+      defer
+    ></script>
+    <script src="./assets/js/googleMap.js"></script>
 </body>
 </html>
