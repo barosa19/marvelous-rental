@@ -21,6 +21,46 @@
     width: 50%;
 }
 
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    border: 0.3rem solid blue;
+    
+}
+
+.card-section {
+    padding: 0.3rem;
+}
+
+.card-img {
+    width: 40%;
+    padding: 0.3rem;
+}
+
+.card-address {
+    font-size: 1rem;
+}
+
+.card-info {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.card-stats {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+
+
 #title {
     align-items: center;
     text-align: center;
