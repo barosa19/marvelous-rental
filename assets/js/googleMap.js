@@ -26,7 +26,7 @@ fetch(googleURL)
       furnitureEl.innerHTML += `<img src=${storeImg} />`  
     }
     else{
-      furnitureEl.innerHTML += `<img src="../icons/new-store.png"/>`
+      furnitureEl.innerHTML += `<img src="./assets/icons/new-store.png"/>`
     } 
     }
 })
