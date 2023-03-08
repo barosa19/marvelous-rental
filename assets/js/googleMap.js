@@ -1,8 +1,12 @@
-
+var googleOBJ;
+var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
 
 function loadGoogle(googleRealtorZip) {
+  if (googleTempOBJ){
+    googleOBJ = googleTempOBJ;
+    return;
+  }
 
-  var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
   console.log("realtorZip is:", realtorZip);
   if (!googleRealtorZip) {
     console.log("googleRealtorZip undefined");
@@ -10,35 +14,39 @@ function loadGoogle(googleRealtorZip) {
   }
   var googleZipcode = googleRealtorZip.split("=")[1]; // was 30318
   var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${googleZipcode}&key=${googleMapsAPI}&libraries=places`
-  var furnitureEl = document.querySelector('.furniture')
+  
 
   fetch(googleURL)
   .then(function (response) {
       return response.json()
   })
   .then(function (data) {
+    googleOBJ = data
     
-      var listings = data.results
-      for (i = 0; i < 10 ; i++){
-      var furnitureList = listings[i]
-      console.log(furnitureList)
-      var storeName = furnitureList.name
-      furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
-      var storeAddress = furnitureList.formatted_address
-      furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
-      if (furnitureList.photos !== undefined){
-        var storePhotoref = furnitureList.photos[0].photo_reference
-        var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
-        console.log(storeImg)
-        furnitureEl.innerHTML += `<img src=${storeImg} />`  
-      }
-      else{
-        furnitureEl.innerHTML += `<img src="./assets/icons/new-store.png"/>`
-      } 
-      }
   })
 }
 
+function printGoogle(){
+var furnitureEl = document.querySelector('.furniture')
+var listings = googleOBJ //.results
+for (i = 0; i < 10 ; i++){
+var furnitureList = listings[i]
+console.log(furnitureList)
+var storeName = furnitureList.name
+furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
+var storeAddress = furnitureList.formatted_address
+furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
+if (furnitureList.photos !== undefined){
+  var storePhotoref = furnitureList.photos[0].photo_reference
+  var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
+  console.log(storeImg)
+  furnitureEl.innerHTML += `<img src=${storeImg} />`  
+}
+else{
+  furnitureEl.innerHTML += `<img src="./assets/icons/new-store.png"/>`
+} 
+}
+}
 function initAutocomplete() {
   const map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -33.8688, lng: 151.2195 },
@@ -109,5 +117,3 @@ function initAutocomplete() {
   });
 }
 window.initAutocomplete = initAutocomplete;
-
-// loadGoogle();

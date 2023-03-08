@@ -30,10 +30,26 @@ body {
     outline-color: blue;
 }
 
-.houses,
-.furniture {
-    width: 25%;
-    <<<<<<< HEAD overflow-y: scroll;
+@media all and (max-width: 600px) {
+    .output-rows {
+        flex-wrap: wrap;
+        height: 200px;
+    }
+
+    .map {
+        width: 50%;
+        order: 3;
+    }
+
+    .houses {
+        width: 50%;
+        order: 1;
+    }
+
+    .furniture {
+        width: 50%;
+        order: 2;
+    }
 }
 
 .map {
