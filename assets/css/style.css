@@ -98,20 +98,15 @@ body {
     align-items: center;
 }
 
-
-
-
-
 #title {
-    <<<<<<< HEAD align-items: center;
+    align-items: center;
     text-align: center;
     color: white;
     font-family: 'Fakt Pro', sans-serif;
-    =======align-items: center;
     text-align: center;
     color: white;
     font-family: 'Fakt Pro', 'sans-serif';
-    >>>>>>>0215dede5c1cd5285594288610835f179222f4be
+
 }
 
 #title span {
