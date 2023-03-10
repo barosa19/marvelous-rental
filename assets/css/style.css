@@ -20,12 +20,12 @@ body {
 }
 
 .map {
-    /* float: left; */
-/* height: 500px; */
-/* text-align: center; */
-/* outline-style: solid; */
-/* outline-color: blue; */
-/* } */
+    float: left;
+height: 500px;
+text-align: center;
+outline-style: solid;
+outline-color: blue;
+} */
 
 .houses,
 .furniture {
@@ -35,9 +35,6 @@ body {
 
 #map {
     width: 50%;
-}
-
-#map {
     height: 100%;
 }
 
@@ -63,9 +60,6 @@ body {
     }
 }
 
-.map {
-    width: 50%;
-}
 
 @media all and (max-width: 600px) {
     #output-rows {
