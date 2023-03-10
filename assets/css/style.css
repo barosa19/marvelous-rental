@@ -113,7 +113,7 @@ body {
 
 .card-address {
     font-size: 1rem;
-    /* display: flex; */
+    display: flex;
 
 }
 
@@ -134,17 +134,17 @@ body {
 
 
 
-/* .card-stats { */
-/* display: flex; */
-/* flex-direction: row; */
-/* justify-content: space-around; */
-/* align-items: center; */
-/* } */
+.card-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
 
 #title {
     align-items: center;
     text-align: center;
-    background-color: #296fa8 !important;
+    background-color: #296fa8;
     /* font-size: 25px; */
     font-weight: 500;
     padding: 20px 2px;
