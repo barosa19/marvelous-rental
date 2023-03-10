@@ -103,9 +103,12 @@ function displayRentalData() {
     bA.setAttribute("class", "ba00");
     bA.textContent = `Bathrooms: ${r.bathrooms}`;
     //add br and ba to card-info
-    cardSection.appendChild(bR);
-    cardSection.appendChild(bA);
-    //add card-img and card-info to card-stats
+    // cardInfo.appendChild(bR);
+    // cardInfo.appendChild(bA);
+    cardSection.appendChild(bR)
+    cardSection.appendChild(bA)
+
+    //add card-img and card-ingo to card-stats
     cardStats.appendChild(cardImg);
     cardStats.appendChild(cardInfo);
     //add card-stats to card-section
@@ -122,7 +125,7 @@ function displayRentalData() {
 function loadRentalData() {
   //load previous fetch objects from localStorage
 
-  rentalArray = localStorage.getItem('rental-array');
+  // rentalArray = localStorage.getItem('rental-array');
 
   //if we have stored content, load it
   if (rentalArray) {
