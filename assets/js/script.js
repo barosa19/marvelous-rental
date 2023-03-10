@@ -10,7 +10,7 @@ var realtorSearchType = "rentalListings";
 var realtorAPIKey = 'rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a';
 var realtorCity = "";//"&city=Atlanta";
 var realtorState = "";//"&state=GA";
-var realtorZip = ""; // "&zipCode=30009"
+var realtorZip = "" ; // "&zipCode=30009"
 var realtorNumResults = "&limit=10";
 
 // fetch realtor API data
@@ -33,26 +33,26 @@ function fetchRentalData() {
   //fetch data from API
   console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
-    .then(function (response) {
+    .then(function(response) {
       if (!response.ok) {
-        console.log("error");
-        throw response.json();
-      }
+          console.log("error");
+          throw response.json();
+        }
       var respObj = response.json();
       console.log(respObj);
       return respObj;
-    })
+      })
     .then(function (data) {
-      //do stuff 
-      rentalArray = data;
-      console.log(data);
-      console.log("API successfully loaded into global rentalArray");
-
-      //save new array
-      saveRentalData();
-      displayRentalData();
-      console.log(rentalArray);
-      loadGoogle(realtorZip);
+     //do stuff 
+     rentalArray = data;
+     console.log(data);
+     console.log ("API successfully loaded into global rentalArray");
+     
+     //save new array
+     saveRentalData();
+     displayRentalData();
+     console.log(rentalArray);
+     loadGoogle(realtorZip);
     })
     .catch(err => console.error(err));
 }
@@ -71,15 +71,14 @@ function saveRentalData() {
 function displayRentalData() {
   //go through rental object and create cards for each element in array
   rentalElem.textContent = "";
-  for (var i = 0; i < rentalArray.length; i++) {
+  for (var i=0;i<rentalArray.length;i++){
     //create card
     var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-5");
-
+    cardDiv.setAttribute("class", "card");
     //create card-section
     var cardSection = document.createElement("div");
-    cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark");
-    cardSection.setAttribute("id", "address00 ");
+    cardSection.setAttribute("class", "card-section");
+    cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
@@ -89,7 +88,7 @@ function displayRentalData() {
     cardStats.setAttribute("class", "card-stats");
     //create card-img
     var cardImg = document.createElement("img");
-    cardImg.setAttribute("class", "card-img has-background-danger-dark");
+    cardImg.setAttribute("class", "card-img");
     cardImg.setAttribute("src", "./assets/icons/rental01.png")
     cardImg.setAttribute("alt", "rental property");
     //create card-info
@@ -97,15 +96,15 @@ function displayRentalData() {
     cardInfo.setAttribute("class", "card-info");
     //create BR and BA
     var bR = document.createElement("p");
-    bR.setAttribute("class", "br00");
-    bR.textContent = `Bedrooms: ${r.bedrooms}`;
+    bR.setAttribute("id", "br00");
+    bR.textContent = `BR: ${r.bedrooms}`;
     var bA = document.createElement("p");
-    bA.setAttribute("class", "ba00");
-    bA.textContent = `Bathrooms: ${r.bathrooms}`;
+    bA.setAttribute("id", "ba00");
+    bA.textContent = `BA: ${r.bathrooms}`;
     //add br and ba to card-info
-    cardSection.appendChild(bR);
-    cardSection.appendChild(bA);
-    //add card-img and card-info to card-stats
+    cardInfo.appendChild(bR);
+    cardInfo.appendChild(bA)
+    //add card-img and card-ingo to card-stats
     cardStats.appendChild(cardImg);
     cardStats.appendChild(cardInfo);
     //add card-stats to card-section
@@ -115,15 +114,13 @@ function displayRentalData() {
     //add card to houses class
     rentalElem.appendChild(cardDiv);
   }
-
+  
 }
 
 //load rentaldata from local storage, if any
-function loadRentalData() {
+function loadRentalData () {
   //load previous fetch objects from localStorage
-
   rentalArray = localStorage.getItem('rental-array');
-
   //if we have stored content, load it
   if (rentalArray) {
     console.log("loading stored data");
@@ -138,7 +135,7 @@ function loadRentalData() {
 
 
 //listen to submit button for zipcode search
-zipFormElem.addEventListener('submit', function (event) {
+zipFormElem.addEventListener('submit', function (event){
   event.preventDefault();
   var zipCodeText = zipTextElem.value;
   if (+zipCodeText) {
@@ -148,13 +145,13 @@ zipFormElem.addEventListener('submit', function (event) {
     console.log("going to fetch with zip:", realtorZip);
     fetchRentalData();
     //temporary save and load location
-    saveRentalData();
-    displayRentalData();
-    console.log(rentalArray);
-    loadGoogle(realtorZip);
-    printGoogle();
+        saveRentalData();
+        displayRentalData();
+        console.log(rentalArray);
+        loadGoogle(realtorZip);
+        printGoogle();
     //this section should be deleted after fetch is active
-
+    
   }
   else {
     console.log("not a number");
