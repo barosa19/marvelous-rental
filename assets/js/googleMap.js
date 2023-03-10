@@ -2,7 +2,7 @@ var googleOBJ;
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
 var locationsName= [];
 var locationsArray= []
-var iconURL;
+var iconURL = [];
 
 function loadGoogle(googleRealtorZip) {
   if (googleTempOBJ){
@@ -39,7 +39,7 @@ locationsName.push(storeName)
 var storeLoc = furnitureList.geometry.location
 locationsArray.push(storeLoc)
 var storeIcon = furnitureList.icon
-iconURL = storeIcon
+iconURL.push(storeIcon)
 furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
 var storeAddress = furnitureList.formatted_address
 furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
@@ -70,7 +70,7 @@ function initMap(loc) {
   const markers = locationsArray.map((position, i) => {
     const marker = new google.maps.Marker({
       position,
-      icon: iconURL,
+      icon: iconURL[i],
     });
 
     // markers can only be keyboard focusable when they have click listeners
