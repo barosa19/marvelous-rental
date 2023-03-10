@@ -1,5 +1,8 @@
 var googleOBJ;
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
+var locationsName= [];
+var locationsArray= []
+var iconURL = [];
 
 function loadGoogle(googleRealtorZip) {
   if (googleTempOBJ){
@@ -31,8 +34,12 @@ var furnitureEl = document.querySelector('.furniture')
 var listings = googleOBJ //.results
 for (i = 0; i < 10 ; i++){
 var furnitureList = listings[i]
-console.log(furnitureList)
 var storeName = furnitureList.name
+locationsName.push(storeName)
+var storeLoc = furnitureList.geometry.location
+locationsArray.push(storeLoc)
+var storeIcon = furnitureList.icon
+iconURL.push(storeIcon)
 furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
 var storeAddress = furnitureList.formatted_address
 furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
@@ -46,74 +53,37 @@ else{
   furnitureEl.innerHTML += `<img src="./assets/icons/new-store.png"/>`
 } 
 }
+initMap(locationsArray[1]);
 }
-function initAutocomplete() {
+
+function initMap(loc) {
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.8688, lng: 151.2195 },
-    zoom: 13,
-    mapTypeId: "roadmap",
+    zoom: 3,
+    center: loc, //TODO: need to decide what is center
   });
-  // Create the search box and link it to the UI element.
-  const input = document.getElementById("pac-input");
-  const searchBox = new google.maps.places.SearchBox(input);
-
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  // Bias the SearchBox results towards current map's viewport.
-  map.addListener("bounds_changed", () => {
-    searchBox.setBounds(map.getBounds());
+  const infoWindow = new google.maps.InfoWindow({
+    content: "",
+    disableAutoPan: true,
   });
 
-  let markers = [];
-
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  searchBox.addListener("places_changed", () => {
-    const places = searchBox.getPlaces();
-
-    if (places.length == 0) {
-      return;
-    }
-
-    // Clear out the old markers.
-    markers.forEach((marker) => {
-      marker.setMap(null);
+  // Add some markers to the map.
+  const markers = locationsArray.map((position, i) => {
+    const marker = new google.maps.Marker({
+      position,
+      icon: iconURL[i],
     });
-    markers = [];
 
-    // For each place, get the icon, name and location.
-    const bounds = new google.maps.LatLngBounds();
-
-    places.forEach((place) => {
-      if (!place.geometry || !place.geometry.location) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-
-      const icon = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25),
-      };
-
-      // Create a marker for each place.
-      markers.push(
-        new google.maps.Marker({
-          map,
-          icon,
-          title: place.name,
-          position: place.geometry.location,
-        })
-      );
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
+    // markers can only be keyboard focusable when they have click listeners
+    // open info window when marker is clicked
+    const label = locationsName[i]
+    marker.addListener("click", () => {
+      infoWindow.setContent(label);
+      infoWindow.open(map, marker);
     });
-    map.fitBounds(bounds);
+    return marker;
   });
+
+  // Add a marker clusterer to manage the markers.
+  const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
 }
-window.initAutocomplete = initAutocomplete;
+
