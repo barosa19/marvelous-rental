@@ -1,8 +1,9 @@
-body { 
+body {
     height: 100%;
     margin: 0;
 }
-.form {
+
+/* .form {
     margin-bottom: 20px;
     background-color: white;
     border: solid;
@@ -13,61 +14,117 @@ body {
     width: 100%;
 }
 
-.houses, .furniture, .map {
-    float: left;
-    height: 500px;
-    text-align: center;
-    outline-style:solid;
-    outline-color: blue;
+.houses,
+.furniture {
+    width: 300px;
 }
-.houses, .furniture {
-    width: 25%;
-    overflow-y:scroll;
-  }
-  #map {
-    width: 50%;
-  }
 
-@media all and (max-width: 600px){
-    .output-rows{
-        flex-wrap:wrap;
+.map {
+    /* float: left; */
+/* height: 500px; */
+/* text-align: center; */
+/* outline-style: solid; */
+/* outline-color: blue; */
+/* } */
+
+.houses,
+.furniture {
+    width: 25%;
+    overflow-y: scroll;
+}
+
+#map {
+    width: 50%;
+}
+
+#map {
+    height: 100%;
+}
+
+@media all and (max-width: 600px) {
+    .output-rows {
+        flex-wrap: wrap;
         height: 200px;
     }
+
     .map {
-    width: 50%;
-    order:3;
-  }  
-  
-  .houses{
-    width:50%;
-    order:1;
-  } 
-  
-  .furniture {
-    width:50%;
-    order:2;
-  }
+        width: 50%;
+        order: 3;
+    }
+
+    .houses {
+        width: 50%;
+        order: 1;
+    }
+
+    .furniture {
+        width: 50%;
+        order: 2;
+    }
 }
+
+.map {
+    width: 50%;
+}
+
+@media all and (max-width: 600px) {
+    #output-rows {
+        flex-wrap: wrap;
+        overflow-y: scroll;
+    }
+
+    .map {
+        width: 50%;
+    }
+
+    @media all and (max-width: 600px) {
+        .output-rows {
+            flex-wrap: wrap;
+            height: 200px;
+        }
+
+        .map {
+            width: 100%;
+            order: 3;
+        }
+
+        .houses {
+            width: 50%;
+            order: 1;
+        }
+
+        .furniture {
+            width: 50%;
+            order: 2;
+        }
+    }
+}
+
 
 .card {
     display: flex;
     flex-direction: column;
-    margin: 5px;
-    border: 0.3rem solid blue;
-    
+    /* margin: 5px; */
+    /* border: 0.3rem solid blue; */
+
 }
 
 .card-section {
     padding: 0.3rem;
+    /* display: flex; */
 }
 
 .card-img {
-    width: 40%;
+
+    width: 30%;
     padding: 0.3rem;
+
 }
 
 .card-address {
     font-size: 1rem;
+    display: flex;
+
 }
 
 .card-info {
@@ -77,42 +134,55 @@ body {
     align-items: center;
 }
 
+.houses {
+    width: 300px;
+    height: 200px;
+
+
+}
+
+
+
 
 .card-stats {
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
-
-
-
-
 #title {
-    align-items:center;
-    text-align:center;
-    color:white;
-    font-family: 'Fakt Pro', 'sans-serif';
+    align-items: center;
+    text-align: center;
+    background-color: #296fa8;
+    /* font-size: 25px; */
+    font-weight: 500;
+    padding: 20px 2px;
 }
+
+/* 
 #title span {
     background-color: red;
-    border:solid;
+    border: solid;
     border-width: 5px;
     border-radius: 10px;
     border-color: black;
     padding: 8px;
-}
-#zipEntryText{
+} */
+
+/* #zipEntryText {
     background-color: rgb(237, 237, 237);
-}
-#zipEntrySubmit{
+} */
+
+/* 
+#zipEntrySubmit {
     background-color: blue;
-    color:white;
+    color: white;
     font-weight: bold;
-}
-#zipEntrySubmit:hover{
+} */
+
+/* #zipEntrySubmit:hover {
     color: black;
     background-color: greenyellow;
     cursor: pointer;
-}
+} */
