@@ -7,7 +7,6 @@
     <title>Document</title>
     <link href="https://fonts.cdnfonts.com/css/fakt-pro" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css"/>
-    <link rel="stylesheet" href="./assets/css/map.css"/>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
@@ -26,13 +25,6 @@
         <div class="houses ">
 <!-- rental property cards load here -->
         </div>
-        <div class="map">
-          <input
-          id="pac-input"
-          class="controls"
-          type="text"
-          placeholder="Search Box"
-        />
         <div id="map"></div>
         </div>
         <div class="furniture">
@@ -42,9 +34,10 @@
     <script src="./assets/js/rentalArray.js"></script>
     <script src="./assets/js/script.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
       defer
     ></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script src="./assets/js/googleMapData.js"></script>
     <script src="./assets/js/googleMap.js"></script>
 </body>
