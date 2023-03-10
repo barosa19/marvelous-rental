@@ -104,19 +104,7 @@ function displayBingData () {
     .catch(err => console.error(err));
 }
 
-function getStreetView (streetAddress){
-    var formattedAddress = "";
-    var tmpAddress = streetAddress.split(" ");
-    for (var i=0;i<tmpAddress.length; i++) {
-        if (i==0){
-            formattedAddress = tmpAddress[i]
-        } else {
-            formattedAddress = formattedAddress.concat("%20", tmpAddress[i]);
-        }
-        console.log(formattedAddress);
-    }
-    // fetch(`https://dev.virtualearth.net/REST/v1/Imagery/Map/Streetside/${streetAddress}?zoomlevel=0&key=${bingAPIKey}`)
-}
+
 
 
 function loadBingData (){
