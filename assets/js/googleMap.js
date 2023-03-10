@@ -25,7 +25,6 @@ function loadGoogle(googleRealtorZip) {
   })
   .then(function (data) {
     googleOBJ = data
-    
   })
 }
 
@@ -86,4 +85,3 @@ function initMap(loc) {
   // Add a marker clusterer to manage the markers.
   const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
 }
-
