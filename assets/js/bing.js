@@ -69,18 +69,24 @@ function fetchBingData () {
 
 
 function displayBingData () {
-    var bingFurnArray = bingFurnObj.resourceSets[0];
+    var bingFurnArray = bingFurnObj.resourceSets[0].resources;
     var bingMapString = "https://dev.virtualearth.net/REST/v1/Imagery/Map/imagerySet";
     
-    for (var i=0;i< bingFurnArray.length; i++){
+    console.log("bingfurnarray is:", bingFurnArray);
+
+    for (var i=0;i<bingFurnArray.length; i++){
         var pushPin;
-        if (i===0){
+        if (i==0){
             pushPin = "?pushpin=";
         } else {
             pushPin = "&pushpin=";
         }
-        pushPin.concat(`${bingZipLat},${bingZipLong};1;${i+1}`);
-        bingMapString.concat(pushPin);
+        var coords = bingFurnArray[i].point.coordinates;
+        // console.log(coords);
+        var stringToAdd = `${pushPin}${coords[0]},${coords[1]}`;
+        //`${pushPin}${coords[0]},${coords[1]};1;F${i+1}`;
+        // console.log(`${pushPin}${coords[0]},${coords[1]};1;${i+1}`);
+        bingMapString = bingMapString.concat(stringToAdd);
         console.log(bingMapString);
     }  
     //removed string &mapLayer={mapLayer}&format={format}&mapMetadata={mapMetadata}
@@ -92,6 +98,24 @@ function displayBingData () {
         }
         console.log(response);
     })
+    .then (function (data){
+        console.log("finishing map fetch");
+    })
+    .catch(err => console.error(err));
+}
+
+function getStreetView (streetAddress){
+    var formattedAddress = "";
+    var tmpAddress = streetAddress.split(" ");
+    for (var i=0;i<tmpAddress.length; i++) {
+        if (i==0){
+            formattedAddress = tmpAddress[i]
+        } else {
+            formattedAddress = formattedAddress.concat("%20", tmpAddress[i]);
+        }
+        console.log(formattedAddress);
+    }
+    // fetch(`https://dev.virtualearth.net/REST/v1/Imagery/Map/Streetside/${streetAddress}?zoomlevel=0&key=${bingAPIKey}`)
 }
 
 

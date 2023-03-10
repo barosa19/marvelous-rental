@@ -13,6 +13,9 @@ var realtorState = "";//"&state=GA";
 var realtorZip = "" ; // "&zipCode=30009"
 var realtorNumResults = "&limit=10";
 
+//key for call to bing API
+var bingAPIKey = 'AiG4EPc6Fx1YkYlJcKu0BI-b5jWafgdxk4pQkefyU5iNYFa2wn0x24qyz8v4BY1d';
+
 // fetch realtor API data
 function fetchRentalData() {
 
@@ -31,7 +34,7 @@ function fetchRentalData() {
     }
   };
   //fetch data from API
-  console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
+  // console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
     .then(function(response) {
       if (!response.ok) {
@@ -67,6 +70,22 @@ function saveRentalData() {
   }
 }
 
+//function to generate a street view URL for use with Bing API
+function getStreetView (streetAddress){
+  var formattedAddress = "";
+  var tmpAddress = streetAddress.split(" ");
+  for (var i=0;i<tmpAddress.length; i++) {
+      if (i==0){
+          formattedAddress = tmpAddress[i]
+      } else {
+          formattedAddress = formattedAddress.concat("%20", tmpAddress[i]);
+      }
+      // console.log(formattedAddress);
+  }
+  var streetView = `https://dev.virtualearth.net/REST/v1/Imagery/Map/Streetside/${formattedAddress}?zoomlevel=0&key=${bingAPIKey}`;
+  return streetView;
+}
+
 //load rental data from rentalArray into side bar
 function displayRentalData() {
   //go through rental object and create cards for each element in array
@@ -89,7 +108,14 @@ function displayRentalData() {
     //create card-img
     var cardImg = document.createElement("img");
     cardImg.setAttribute("class", "card-img");
-    cardImg.setAttribute("src", "./assets/icons/rental01.png")
+
+    //get the streetview image if available
+    var getStreetViewInput = `${r.addressLine1} ${r.city}, ${r.state}`;
+    var streetViewURL = getStreetView(getStreetViewInput);
+      // console.log(streetViewURL);
+      cardImg.setAttribute("src", streetViewURL);
+      cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/rental01.png'");
+
     cardImg.setAttribute("alt", "rental property");
     //create card-info
     var cardInfo = document.createElement("div");
