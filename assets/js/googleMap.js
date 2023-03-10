@@ -1,5 +1,8 @@
 var googleOBJ;
 var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
+var locationsName= [];
+var locationsArray= []
+var iconURL;
 
 function loadGoogle(googleRealtorZip) {
   if (googleTempOBJ){
@@ -31,8 +34,12 @@ var furnitureEl = document.querySelector('.furniture')
 var listings = googleOBJ //.results
 for (i = 0; i < 10 ; i++){
 var furnitureList = listings[i]
-console.log(furnitureList)
 var storeName = furnitureList.name
+locationsName.push(storeName)
+var storeLoc = furnitureList.geometry.location
+locationsArray.push(storeLoc)
+var storeIcon = furnitureList.icon
+iconURL = storeIcon
 furnitureEl.innerHTML += `<h1> ${storeName} </h1>`
 var storeAddress = furnitureList.formatted_address
 furnitureEl.innerHTML += `<h3> ${storeAddress} </h3>`
@@ -46,21 +53,37 @@ else{
   furnitureEl.innerHTML += `<img src="./assets/icons/new-store.png"/>`
 } 
 }
-}
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  const uluru = { lat: -25.344, lng: 131.031 };
-  // The map, centered at Uluru
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
-    center: uluru,
-  });
-  // The marker, positioned at Uluru
-  const marker = new google.maps.Marker({
-    position: uluru,
-    map: map,
-  });
+initMap(locationsArray[1]);
 }
 
-window.initMap = initMap;
+function initMap(loc) {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 3,
+    center: loc, //TODO: need to decide what is center
+  });
+  const infoWindow = new google.maps.InfoWindow({
+    content: "",
+    disableAutoPan: true,
+  });
+
+  // Add some markers to the map.
+  const markers = locationsArray.map((position, i) => {
+    const marker = new google.maps.Marker({
+      position,
+      icon: iconURL,
+    });
+
+    // markers can only be keyboard focusable when they have click listeners
+    // open info window when marker is clicked
+    const label = locationsName[i]
+    marker.addListener("click", () => {
+      infoWindow.setContent(label);
+      infoWindow.open(map, marker);
+    });
+    return marker;
+  });
+
+  // Add a marker clusterer to manage the markers.
+  const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+}
+
