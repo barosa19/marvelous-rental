@@ -3,25 +3,21 @@ body {
     margin: 0;
 }
 
-.form {
-    margin-bottom: 20px;
-    background-color: white;
-    border: solid;
-}
-
-*/ .output-rows {
+.output-rows {
     display: flex;
     width: 100%;
+}
+
+.furniture {
+    width: 300px;
 }
 
 .houses,
 .furniture,
 .map {
-    float: left;
+
     height: 500px;
     text-align: center;
-    outline-style: solid;
-    outline-color: blue;
 }
 
 .houses,
@@ -59,9 +55,6 @@ body {
 .card {
     display: flex;
     flex-direction: column;
-    margin: 5px;
-    border: 0.3rem solid blue;
-
 }
 
 .card-section {
@@ -93,37 +86,22 @@ body {
 }
 
 
-
-
-
 #title {
     align-items: center;
     text-align: center;
     color: white;
     font-family: 'Fakt Pro', 'sans-serif';
+    background-color: #296fa8 !important;
+    font-weight: 500;
+    padding: 20px 2px;
 }
 
-#title span {
-    background-color: red;
-    border: solid;
-    border-width: 5px;
-    border-radius: 10px;
-    border-color: black;
-    padding: 8px;
-}
 
-#zipEntryText {
-    background-color: rgb(237, 237, 237);
-}
 
-#zipEntrySubmit {
-    background-color: blue;
-    color: white;
-    font-weight: bold;
-}
 
-#zipEntrySubmit:hover {
-    color: black;
-    background-color: greenyellow;
-    cursor: pointer;
+
+
+#furniture {
+    display: flex;
+
 }

@@ -93,10 +93,10 @@ function displayRentalData() {
   for (var i = 0; i < rentalArray.length; i++) {
     //create card
     var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "card");
+    cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-7");
     //create card-section
     var cardSection = document.createElement("div");
-    cardSection.setAttribute("class", "card-section");
+    cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
     cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
