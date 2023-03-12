@@ -53,7 +53,7 @@ function fetchRentalData() {
      
      //save new array
      saveRentalData();
-     displayRentalData();
+     displayRentalData(rentalElem, rentalArray);
      console.log(rentalArray);
      loadGoogle(realtorZip);
     })
@@ -87,18 +87,18 @@ function getStreetView (streetAddress){
 }
 
 //load rental data from rentalArray into side bar
-function displayRentalData() {
+function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArray
   //go through rental object and create cards for each element in array
-  rentalElem.textContent = "";
-  for (var i=0;i<rentalArray.length;i++){
+  currentElem.textContent = "";
+  for (var i=0;i<currentArray.length;i++){
     //create card
     var cardDiv = document.createElement("div");
     cardDiv.setAttribute("class", "card");
     //create card-section
     var cardSection = document.createElement("div");
     cardSection.setAttribute("class", "card-section");
-    cardSection.setAttribute("id", "address00");
-    var r = rentalArray[i]
+    cardSection.setAttribute("id", `addressR${i}`);
+    var r = currentArray[i]
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
     cardSection.innerHTML = curAddress;
@@ -138,7 +138,7 @@ function displayRentalData() {
     //add card-section to card
     cardDiv.appendChild(cardSection);
     //add card to houses class
-    rentalElem.appendChild(cardDiv);
+    currentElem.appendChild(cardDiv);
   }
   
 }
@@ -151,7 +151,7 @@ function loadRentalData () {
   if (rentalArray) {
     console.log("loading stored data");
     rentalArray = JSON.parse(rentalArray);
-    displayRentalData();
+    displayRentalData(rentalElem, rentalArray);
     // loadGoogle(realtorZip);
   } else {
     console.log("no data in localStorage");
@@ -172,7 +172,7 @@ zipFormElem.addEventListener('submit', function (event){
     fetchRentalData();
     //temporary save and load location
         saveRentalData();
-        displayRentalData();
+        displayRentalData(rentalElem, rentalArray);
         console.log(rentalArray);
         loadGoogle(realtorZip);
         printGoogle();
