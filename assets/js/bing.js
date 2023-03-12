@@ -56,6 +56,7 @@ function fetchBingData () {
                     console.log("bing API loaded into global bingFurnObj");
 
                     //saveBingData()
+                    displayBingFurnCards(bingFurnObj);
                     displayBingData();
                     console.log(bingFurnObj);
                 })
@@ -63,6 +64,66 @@ function fetchBingData () {
     
         })
         .catch(err => console.error(err));
+
+
+}
+
+//display bing furn data in Cards
+function displayBingFurnCards (bingFurnObj) {
+    var bingFurnitureElem = document.querySelector('.furniture');
+    bingFurnitureElem.textContent = "";
+    
+    var bingFurnArray = bingFurnObj.resourceSets[0].resources;
+        for (var i=0;i<bingFurnArray.length;i++){
+      //create card
+      var cardDiv = document.createElement("div");
+      cardDiv.setAttribute("class", "card");
+      //create card-section
+      var cardSection = document.createElement("div");
+      cardSection.setAttribute("class", "card-section");
+      cardSection.setAttribute("id", `addressF${i}`);
+      var f = bingFurnArray[i].Address //
+      var curAddress = `${f.addressLine}<br>${f.locality}, ${f.adminDistrict} ${f.postalCode}`;
+      // console.log("current address is:", curAddress);
+      cardSection.innerHTML = curAddress;
+      //create card-stats
+      var cardStats = document.createElement("div");
+      cardStats.setAttribute("class", "card-stats");
+      //create card-img
+      var cardImg = document.createElement("img");
+      cardImg.setAttribute("class", "card-img");
+  
+      //get the streetview image if available
+      var getStreetViewInput = `${f.addressLine} ${f.locality}, ${f.adminDistrict}`;
+      var streetViewURL = getStreetView(getStreetViewInput);
+        // console.log(streetViewURL);
+        cardImg.setAttribute("src", streetViewURL);
+        cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/new-store.png'");
+  
+      cardImg.setAttribute("alt", "furniture store");
+      //create card-info
+      var cardInfo = document.createElement("div");
+      cardInfo.setAttribute("class", "card-info");
+      //create BR and BA
+    //   var bR = document.createElement("p");
+    //   bR.setAttribute("id", "br00");
+    //   bR.textContent = `BR: ${r.bedrooms}`;
+    //   var bA = document.createElement("p");
+    //   bA.setAttribute("id", "ba00");
+    //   bA.textContent = `BA: ${r.bathrooms}`;
+      //add br and ba to card-info
+    //   cardInfo.appendChild(bR);
+    //   cardInfo.appendChild(bA)
+      //add card-img and card-ingo to card-stats
+      cardStats.appendChild(cardImg);
+      cardStats.appendChild(cardInfo);
+      //add card-stats to card-section
+      cardSection.appendChild(cardStats);
+      //add card-section to card
+      cardDiv.appendChild(cardSection);
+      //add card to houses class
+      bingFurnitureElem.appendChild(cardDiv);
+    }
 
 
 }

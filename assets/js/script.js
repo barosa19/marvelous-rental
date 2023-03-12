@@ -97,7 +97,7 @@ function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArr
     //create card-section
     var cardSection = document.createElement("div");
     cardSection.setAttribute("class", "card-section");
-    cardSection.setAttribute("id", "address00");
+    cardSection.setAttribute("id", `addressR${i}`);
     var r = currentArray[i]
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
