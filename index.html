@@ -7,48 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.cdnfonts.com/css/fakt-pro" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/map.css" />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 
 <body>
-    <header class="mb-0" class="header">
-        <div id="title">
-            <span class="title is-2 has-background-danger-dark has-text-white ">Marvelous Rentals</span>
-        </div>
+    <header class="header">
+        <h1 id="title"><span>Marvelous Rentals</span></h2>
 
     </header>
 
-    <form class="ml-2" id="zipForm" class="form">
-        <h1 class="subtitle is-3">Enter your zipcode below:</h1>
-        <input style="width:33%" class="input is-rounded is-info is-medium" type="text" placeholder="Enter zipcode"
-            id="zipEntryText" maxlength="5">
-        <button class="button is-info is-rounded m-3" type="submit" id="zipEntrySubmit" value="Find Furniture">Find
-            Furniture</button>
+    <form id="zipForm" class="form">
+        <h2>Enter your zipcode below:</h2>
+        <input type="text" id="zipEntryText" maxlength="5">
+        <input type="submit" id="zipEntrySubmit" value="Find Furniture">
     </form>
 
     <div class="output-rows">
-        <div class="houses">
+        <div class="houses ">
             <!-- rental property cards load here -->
         </div>
-        <div class="map m-2">
-            <input style="width:40%" class="input is-rounded is-info is-small mt-1" id="pac-input" class="controls"
-                type="text" placeholder="Search Box" />
-            <div id="map"></div>
-        </div>
-        <div class="furniture">
-            <h2> Furniture will be listed here</h2>
-        </div>
+        <div id="map"></div>
+    </div>
+    <div class="furniture">
+        <h2> Furniture will be listed here</h2>
+    </div>
     </div>
     <script src="./assets/js/rentalArray.js"></script>
     <script src="./assets/js/script.js"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
         defer></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script src="./assets/js/googleMapData.js"></script>
     <script src="./assets/js/googleMap.js"></script>
+    <!-- <script src="./assets/js/bing.js"></script> -->
+
 </body>
 
 </html>

@@ -3,32 +3,35 @@ body {
     margin: 0;
 }
 
-/* .form {
+.form {
     margin-bottom: 20px;
     background-color: white;
     border: solid;
-} */
+}
 
-.output-rows {
+*/ .output-rows {
     display: flex;
     width: 100%;
 }
 
 .houses,
-.furniture {
-    width: 300px;
-}
-
+.furniture,
 .map {
-    /* float: left; */
+    float: left;
     height: 500px;
     text-align: center;
-    /* outline-style: solid; */
-    /* outline-color: blue; */
+    outline-style: solid;
+    outline-color: blue;
+}
+
+.houses,
+.furniture {
+    width: 25%;
+    overflow-y: scroll;
 }
 
 #map {
-    height: 100%;
+    width: 50%;
 }
 
 @media all and (max-width: 600px) {
@@ -53,68 +56,25 @@ body {
     }
 }
 
-.map {
-    width: 50%;
-}
-
-@media all and (max-width: 600px) {
-    #output-rows {
-        flex-wrap: wrap;
-        overflow-y: scroll;
-    }
-
-    .map {
-        width: 50%;
-    }
-
-    @media all and (max-width: 600px) {
-        .output-rows {
-            flex-wrap: wrap;
-            height: 200px;
-        }
-
-        .map {
-            width: 100%;
-            order: 3;
-        }
-
-        .houses {
-            width: 50%;
-            order: 1;
-        }
-
-        .furniture {
-            width: 50%;
-            order: 2;
-        }
-    }
-}
-
-
 .card {
     display: flex;
     flex-direction: column;
-    /* margin: 5px; */
-    /* border: 0.3rem solid blue; */
+    margin: 5px;
+    border: 0.3rem solid blue;
 
 }
 
 .card-section {
     padding: 0.3rem;
-    /* display: flex; */
 }
 
 .card-img {
-
-    width: 30%;
+    width: 40%;
     padding: 0.3rem;
-
 }
 
 .card-address {
     font-size: 1rem;
-    /* display: flex; */
-
 }
 
 .card-info {
@@ -124,33 +84,25 @@ body {
     align-items: center;
 }
 
-.houses {
-    width: 300px;
-    height: 200px;
 
-
+.card-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
 
 
-/* .card-stats { */
-/* display: flex; */
-/* flex-direction: row; */
-/* justify-content: space-around; */
-/* align-items: center; */
-/* } */
 
 #title {
     align-items: center;
     text-align: center;
-    background-color: #296fa8 !important;
-    /* font-size: 25px; */
-    font-weight: 500;
-    padding: 20px 2px;
+    color: white;
+    font-family: 'Fakt Pro', 'sans-serif';
 }
 
-/* 
 #title span {
     background-color: red;
     border: solid;
@@ -158,21 +110,20 @@ body {
     border-radius: 10px;
     border-color: black;
     padding: 8px;
-} */
+}
 
-/* #zipEntryText {
+#zipEntryText {
     background-color: rgb(237, 237, 237);
-} */
+}
 
-/* 
 #zipEntrySubmit {
     background-color: blue;
     color: white;
     font-weight: bold;
-} */
+}
 
-/* #zipEntrySubmit:hover {
+#zipEntrySubmit:hover {
     color: black;
     background-color: greenyellow;
     cursor: pointer;
-} */
+}

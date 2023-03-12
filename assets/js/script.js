@@ -13,6 +13,9 @@ var realtorState = "";//"&state=GA";
 var realtorZip = ""; // "&zipCode=30009"
 var realtorNumResults = "&limit=10";
 
+//key for call to bing API
+var bingAPIKey = 'AiG4EPc6Fx1YkYlJcKu0BI-b5jWafgdxk4pQkefyU5iNYFa2wn0x24qyz8v4BY1d';
+
 // fetch realtor API data
 function fetchRentalData() {
 
@@ -31,7 +34,7 @@ function fetchRentalData() {
     }
   };
   //fetch data from API
-  console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
+  // console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
     .then(function (response) {
       if (!response.ok) {
@@ -67,6 +70,22 @@ function saveRentalData() {
   }
 }
 
+//function to generate a street view URL for use with Bing API
+function getStreetView(streetAddress) {
+  var formattedAddress = "";
+  var tmpAddress = streetAddress.split(" ");
+  for (var i = 0; i < tmpAddress.length; i++) {
+    if (i == 0) {
+      formattedAddress = tmpAddress[i]
+    } else {
+      formattedAddress = formattedAddress.concat("%20", tmpAddress[i]);
+    }
+    // console.log(formattedAddress);
+  }
+  var streetView = `https://dev.virtualearth.net/REST/v1/Imagery/Map/Streetside/${formattedAddress}?zoomlevel=0&key=${bingAPIKey}`;
+  return streetView;
+}
+
 //load rental data from rentalArray into side bar
 function displayRentalData() {
   //go through rental object and create cards for each element in array
@@ -74,12 +93,11 @@ function displayRentalData() {
   for (var i = 0; i < rentalArray.length; i++) {
     //create card
     var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-5");
-
+    cardDiv.setAttribute("class", "card");
     //create card-section
     var cardSection = document.createElement("div");
-    cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark");
-    cardSection.setAttribute("id", "address00 ");
+    cardSection.setAttribute("class", "card-section");
+    cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
@@ -89,25 +107,29 @@ function displayRentalData() {
     cardStats.setAttribute("class", "card-stats");
     //create card-img
     var cardImg = document.createElement("img");
-    cardImg.setAttribute("class", "card-img has-background-danger-dark");
-    cardImg.setAttribute("src", "./assets/icons/rental01.png")
+    cardImg.setAttribute("class", "card-img");
+
+    //get the streetview image if available
+    var getStreetViewInput = `${r.addressLine1} ${r.city}, ${r.state}`;
+    var streetViewURL = getStreetView(getStreetViewInput);
+    // console.log(streetViewURL);
+    cardImg.setAttribute("src", streetViewURL);
+    cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/rental01.png'");
+
     cardImg.setAttribute("alt", "rental property");
     //create card-info
     var cardInfo = document.createElement("div");
     cardInfo.setAttribute("class", "card-info");
     //create BR and BA
     var bR = document.createElement("p");
-    bR.setAttribute("class", "br00");
-    bR.textContent = `Bedrooms: ${r.bedrooms}`;
+    bR.setAttribute("id", "br00");
+    bR.textContent = `BR: ${r.bedrooms}`;
     var bA = document.createElement("p");
-    bA.setAttribute("class", "ba00");
-    bA.textContent = `Bathrooms: ${r.bathrooms}`;
+    bA.setAttribute("id", "ba00");
+    bA.textContent = `BA: ${r.bathrooms}`;
     //add br and ba to card-info
-    // cardInfo.appendChild(bR);
-    // cardInfo.appendChild(bA);
-    cardSection.appendChild(bR)
-    cardSection.appendChild(bA)
-
+    cardInfo.appendChild(bR);
+    cardInfo.appendChild(bA)
     //add card-img and card-ingo to card-stats
     cardStats.appendChild(cardImg);
     cardStats.appendChild(cardInfo);
@@ -124,9 +146,7 @@ function displayRentalData() {
 //load rentaldata from local storage, if any
 function loadRentalData() {
   //load previous fetch objects from localStorage
-
-  // rentalArray = localStorage.getItem('rental-array');
-
+  rentalArray = localStorage.getItem('rental-array');
   //if we have stored content, load it
   if (rentalArray) {
     console.log("loading stored data");
