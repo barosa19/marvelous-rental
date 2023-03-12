@@ -4,10 +4,12 @@ var bingAPIKey = 'AiG4EPc6Fx1YkYlJcKu0BI-b5jWafgdxk4pQkefyU5iNYFa2wn0x24qyz8v4BY
 var bingZipLat;
 var bingZipLong;
 
+//get map and furniture data from bing
 function fetchBingData () {
     var bingState = ""; //&adminDistrict=
     var bingCity = ""; //&locality=
-    var bingZip = ("&postalCode="+"30009");
+    var bingZip = ("&postalCode="+(realtorZip.split("=")[1])); //30009
+    console.log("bingZip is:", bingZip);
     var bingAddress = "" //&addressLine=
 
     var bingCoordsObj; // an array to hold the coordinates for the searched zipcode
@@ -33,12 +35,10 @@ function fetchBingData () {
             bingZipLat = bingCoordsObj.resourceSets[0].resources[0].point.coordinates[0];
             bingZipLong = bingCoordsObj.resourceSets[0].resources[0].point.coordinates[1];
 
-            //create variables for data fetch
+            //create variables for furniture data fetch
             var bingQuery = ("?query=" + "furniture");
             var bingTypeSearch = "" //("&type="+"furniture");
             var bingPoint = ("&userLocation="+bingZipLat+","+bingZipLong);
-
-
             //fetch furniture data from bing API
             fetch (`https://dev.virtualearth.net/REST/v1/LocalSearch/${bingQuery}${bingTypeSearch}${bingPoint}&key=${bingAPIKey}`)
                 .then (function(response) {
@@ -67,46 +67,46 @@ function fetchBingData () {
 
 }
 
-
+//display bing data in Map area
 function displayBingData () {
     var bingFurnArray = bingFurnObj.resourceSets[0].resources;
-    var bingMapString = "https://dev.virtualearth.net/REST/v1/Imagery/Map/imagerySet";
+    var bingMapString = "https://dev.virtualearth.net/REST/v1/Imagery/Map/Road/";
     
+    //add center of map
+    bingMapString = bingMapString.concat(bingZipLat, "%2C", bingZipLong);
+    //add map size
+    bingMapString = bingMapString.concat("/12?mapSize=900%2C600&format=png");
+
     console.log("bingfurnarray is:", bingFurnArray);
 
     for (var i=0;i<bingFurnArray.length; i++){
         var pushPin;
-        if (i==0){
-            pushPin = "?pushpin=";
-        } else {
+        // if (i==0){
+        //     pushPin = "?pushpin=";
+        // } else {
             pushPin = "&pushpin=";
-        }
+        // }
         var coords = bingFurnArray[i].point.coordinates;
         // console.log(coords);
-        var stringToAdd = `${pushPin}${coords[0]},${coords[1]}`;
+        var stringToAdd = `${pushPin}${coords[0]}%2C${coords[1]};1;${i+1}`;
         //`${pushPin}${coords[0]},${coords[1]};1;F${i+1}`;
         // console.log(`${pushPin}${coords[0]},${coords[1]};1;${i+1}`);
         bingMapString = bingMapString.concat(stringToAdd);
-        console.log(bingMapString);
+        // console.log(bingMapString);
     }  
     //removed string &mapLayer={mapLayer}&format={format}&mapMetadata={mapMetadata}
-    fetch(`${bingMapString}&key=${bingAPIKey}`)
-    .then (function(response) {
-        if (!response.ok) {
-            console.log("error");
-            throw response.json();
-        }
-        console.log(response);
-    })
-    .then (function (data){
-        console.log("finishing map fetch");
-    })
-    .catch(err => console.error(err));
+    bingMapString = bingMapString.concat(`&key=${bingAPIKey}`);
+    // console.log("display bing:", `${bingMapString}&key=${bingAPIKey}`);
+    var bingMapElem = document.getElementById("map");
+    bingMapElem.textContent = "";
+    var newMap = document.createElement("img");
+    newMap.setAttribute("src", bingMapString);
+    newMap.setAttribute("style", "width=100%");
+    bingMapElem.appendChild(newMap);
+
 }
 
-
-
-
+// load bing map from localStorage if any saved
 function loadBingData (){
     bingFurnObj = localStorage.getItem('bing-array');
     if (bingFurnObj) {
