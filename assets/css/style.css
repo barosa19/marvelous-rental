@@ -46,7 +46,7 @@ body {
         order: 1;
     }
 
-    #furniture {
+    .furniture {
         width: 50%;
         order: 2;
     }
@@ -98,10 +98,11 @@ body {
 
 
 
-
-
-
 #furniture {
     display: flex;
 
+}
+
+.card-section:hover {
+    background-color: #93ceff;
 }
