@@ -1,60 +1,60 @@
-body { 
+body {
     height: 100%;
     margin: 0;
 }
-.form {
-    margin-bottom: 20px;
-    background-color: white;
-    border: solid;
-}
 
-.output-rows{
-    display:flex;
+.output-rows {
+    display: flex;
     width: 100%;
 }
 
-.houses, .furniture, .map {
-    float: left;
+.furniture {
+    width: 300px;
+}
+
+.houses,
+.furniture,
+.map {
+
     height: 500px;
     text-align: center;
-    outline-style:solid;
-    outline-color: blue;
 }
-.houses, .furniture {
-    width: 25%;
-    overflow-y:scroll;
-  }
-  #map {
-    width: 50%;
-  }
 
-@media all and (max-width: 600px){
-    .output-rows{
-        flex-wrap:wrap;
+.houses,
+.furniture {
+    width: 25%;
+    overflow-y: scroll;
+}
+
+#map {
+    width: 50%;
+}
+
+@media all and (max-width: 600px) {
+    .output-rows {
+        flex-wrap: wrap;
         height: 200px;
     }
+
     .map {
-    width: 50%;
-    order:3;
-  }  
-  
-  .houses{
-    width:50%;
-    order:1;
-  } 
-  
-  .furniture {
-    width:50%;
-    order:2;
-  }
+        width: 50%;
+        order: 3;
+    }
+
+    .houses {
+        width: 50%;
+        order: 1;
+    }
+
+    .furniture {
+        width: 50%;
+        order: 2;
+    }
 }
 
 .card {
     display: flex;
     flex-direction: column;
-    margin: 5px;
-    border: 0.3rem solid blue;
-    
 }
 
 .card-section {
@@ -79,40 +79,29 @@ body {
 
 
 .card-stats {
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
 
-
-
-
 #title {
-    align-items:center;
-    text-align:center;
-    color:white;
+    align-items: center;
+    text-align: center;
+    color: white;
     font-family: 'Fakt Pro', 'sans-serif';
+    background-color: #296fa8 !important;
+    font-weight: 500;
+    padding: 20px 2px;
 }
-#title span {
-    background-color: red;
-    border:solid;
-    border-width: 5px;
-    border-radius: 10px;
-    border-color: black;
-    padding: 8px;
-}
-#zipEntryText{
-    background-color: rgb(237, 237, 237);
-}
-#zipEntrySubmit{
-    background-color: blue;
-    color:white;
-    font-weight: bold;
-}
-#zipEntrySubmit:hover{
-    color: black;
-    background-color: greenyellow;
-    cursor: pointer;
+
+
+
+
+
+
+#furniture {
+    display: flex;
+
 }

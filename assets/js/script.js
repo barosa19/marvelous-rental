@@ -10,7 +10,7 @@ var realtorSearchType = "rentalListings";
 var realtorAPIKey = 'rapidapi-key=cec45dc12fmsh23476bc30edaa01p1ecc27jsnce4ee09a148a';
 var realtorCity = "";//"&city=Atlanta";
 var realtorState = "";//"&state=GA";
-var realtorZip = "" ; // "&zipCode=30009"
+var realtorZip = ""; // "&zipCode=30009"
 var realtorNumResults = "&limit=10";
 
 //key for call to bing API
@@ -36,26 +36,28 @@ function fetchRentalData() {
   //fetch data from API
   // console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
-    .then(function(response) {
+    .then(function (response) {
       if (!response.ok) {
-          console.log("error");
-          throw response.json();
-        }
+        console.log("error");
+        throw response.json();
+      }
       var respObj = response.json();
       console.log(respObj);
       return respObj;
-      })
+    })
     .then(function (data) {
-     //do stuff 
-     rentalArray = data;
-     console.log(data);
-     console.log ("API successfully loaded into global rentalArray");
-     
-     //save new array
-     saveRentalData();
-     displayRentalData(rentalElem, rentalArray);
-     console.log(rentalArray);
-     loadGoogle(realtorZip);
+
+      //do stuff 
+      rentalArray = data;
+      console.log(data);
+      console.log("API successfully loaded into global rentalArray");
+
+      //save new array
+      saveRentalData();
+      displayRentalData();
+      console.log(rentalArray);
+      loadGoogle(realtorZip);
+
     })
     .catch(err => console.error(err));
 }
@@ -71,16 +73,16 @@ function saveRentalData() {
 }
 
 //function to generate a street view URL for use with Bing API
-function getStreetView (streetAddress){
+function getStreetView(streetAddress) {
   var formattedAddress = "";
   var tmpAddress = streetAddress.split(" ");
-  for (var i=0;i<tmpAddress.length; i++) {
-      if (i==0){
-          formattedAddress = tmpAddress[i]
-      } else {
-          formattedAddress = formattedAddress.concat("%20", tmpAddress[i]);
-      }
-      // console.log(formattedAddress);
+  for (var i = 0; i < tmpAddress.length; i++) {
+    if (i == 0) {
+      formattedAddress = tmpAddress[i]
+    } else {
+      formattedAddress = formattedAddress.concat("%20", tmpAddress[i]);
+    }
+    // console.log(formattedAddress);
   }
   var streetView = `https://dev.virtualearth.net/REST/v1/Imagery/Map/Streetside/${formattedAddress}?zoomlevel=0&key=${bingAPIKey}`;
   return streetView;
@@ -89,16 +91,20 @@ function getStreetView (streetAddress){
 //load rental data from rentalArray into side bar
 function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArray
   //go through rental object and create cards for each element in array
-  currentElem.textContent = "";
-  for (var i=0;i<currentArray.length;i++){
+
+  rentalElem.textContent = "";
+  for (var i = 0; i < rentalArray.length; i++) {
+
     //create card
     var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "card");
+    cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-7");
     //create card-section
     var cardSection = document.createElement("div");
-    cardSection.setAttribute("class", "card-section");
-    cardSection.setAttribute("id", `addressR${i}`);
-    var r = currentArray[i]
+
+    cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
+    cardSection.setAttribute("id", "address00");
+    var r = rentalArray[i]
+
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
     cardSection.innerHTML = curAddress;
@@ -112,9 +118,9 @@ function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArr
     //get the streetview image if available
     var getStreetViewInput = `${r.addressLine1} ${r.city}, ${r.state}`;
     var streetViewURL = getStreetView(getStreetViewInput);
-      // console.log(streetViewURL);
-      cardImg.setAttribute("src", streetViewURL);
-      cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/rental01.png'");
+    // console.log(streetViewURL);
+    cardImg.setAttribute("src", streetViewURL);
+    cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/rental01.png'");
 
     cardImg.setAttribute("alt", "rental property");
     //create card-info
@@ -140,11 +146,11 @@ function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArr
     //add card to houses class
     currentElem.appendChild(cardDiv);
   }
-  
+
 }
 
 //load rentaldata from local storage, if any
-function loadRentalData () {
+function loadRentalData() {
   //load previous fetch objects from localStorage
   rentalArray = localStorage.getItem('rental-array');
   //if we have stored content, load it
@@ -161,7 +167,7 @@ function loadRentalData () {
 
 
 //listen to submit button for zipcode search
-zipFormElem.addEventListener('submit', function (event){
+zipFormElem.addEventListener('submit', function (event) {
   event.preventDefault();
   var zipCodeText = zipTextElem.value;
   if (+zipCodeText) {
@@ -171,13 +177,15 @@ zipFormElem.addEventListener('submit', function (event){
     console.log("going to fetch with zip:", realtorZip);
     fetchRentalData();
     //temporary save and load location
-        saveRentalData();
-        displayRentalData(rentalElem, rentalArray);
-        console.log(rentalArray);
-        loadGoogle(realtorZip);
-        printGoogle();
+
+    saveRentalData();
+    displayRentalData(rentalElem, rentalArray);
+    console.log(rentalArray);
+    loadGoogle(realtorZip);
+    printGoogle();
+
     //this section should be deleted after fetch is active
-    
+
   }
   else {
     console.log("not a number");
