@@ -46,7 +46,7 @@ body {
         order: 1;
     }
 
-    .furniture {
+    #furniture {
         width: 50%;
         order: 2;
     }

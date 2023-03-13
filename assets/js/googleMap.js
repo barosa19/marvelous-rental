@@ -39,9 +39,9 @@ function printGoogle() {
     locationsArray.push(storeLoc)
     var storeIcon = furnitureList.icon
     iconURL.push(storeIcon)
-    furnitureEl.innerHTML += `<h1 class="has-text-weight-semibold  has-text-info-dark"> ${storeName} </h1>`
+    furnitureEl.innerHTML += `<h1 class="has-text-weight-semibold  has-text-info-dark is-size-6"> ${storeName} </h1>`
     var storeAddress = furnitureList.formatted_address
-    furnitureEl.innerHTML += `<h3 class="has-text-weight-semibold  has-text-info-dark"> ${storeAddress} </h3>`
+    furnitureEl.innerHTML += `<h3 class=" has-text-info-dark is-size-7"> ${storeAddress} </h3>`
     if (furnitureList.photos !== undefined) {
       var storePhotoref = furnitureList.photos[0].photo_reference
       var storeImg = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${storePhotoref}&key=${googleMapsAPI}`
