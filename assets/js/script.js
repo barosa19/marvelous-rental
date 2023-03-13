@@ -102,7 +102,7 @@ function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArr
     var cardSection = document.createElement("div");
 
     cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
-    cardSection.setAttribute("id", "address00");
+    cardSection.setAttribute("id", `address${i}`);
     var r = rentalArray[i]
 
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
