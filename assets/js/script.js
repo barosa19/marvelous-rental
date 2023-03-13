@@ -179,7 +179,7 @@ zipFormElem.addEventListener('submit', function (event) {
     //temporary save and load location
 
     saveRentalData();
-    displayRentalData();
+    displayRentalData(rentalElem, rentalArray);
     console.log(rentalArray);
     loadGoogle(realtorZip);
     printGoogle();
