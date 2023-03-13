@@ -46,6 +46,7 @@ function fetchRentalData() {
       return respObj;
     })
     .then(function (data) {
+
       //do stuff 
       rentalArray = data;
       console.log(data);
@@ -56,6 +57,7 @@ function fetchRentalData() {
       displayRentalData();
       console.log(rentalArray);
       loadGoogle(realtorZip);
+
     })
     .catch(err => console.error(err));
 }
@@ -87,18 +89,22 @@ function getStreetView(streetAddress) {
 }
 
 //load rental data from rentalArray into side bar
-function displayRentalData() {
+function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArray
   //go through rental object and create cards for each element in array
+
   rentalElem.textContent = "";
   for (var i = 0; i < rentalArray.length; i++) {
+
     //create card
     var cardDiv = document.createElement("div");
     cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-7");
     //create card-section
     var cardSection = document.createElement("div");
+
     cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
     cardSection.setAttribute("id", "address00");
     var r = rentalArray[i]
+
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
     cardSection.innerHTML = curAddress;
@@ -138,7 +144,7 @@ function displayRentalData() {
     //add card-section to card
     cardDiv.appendChild(cardSection);
     //add card to houses class
-    rentalElem.appendChild(cardDiv);
+    currentElem.appendChild(cardDiv);
   }
 
 }
@@ -151,7 +157,7 @@ function loadRentalData() {
   if (rentalArray) {
     console.log("loading stored data");
     rentalArray = JSON.parse(rentalArray);
-    displayRentalData();
+    displayRentalData(rentalElem, rentalArray);
     // loadGoogle(realtorZip);
   } else {
     console.log("no data in localStorage");
@@ -171,11 +177,13 @@ zipFormElem.addEventListener('submit', function (event) {
     console.log("going to fetch with zip:", realtorZip);
     fetchRentalData();
     //temporary save and load location
+
     saveRentalData();
     displayRentalData(rentalElem, rentalArray);
     console.log(rentalArray);
     loadGoogle(realtorZip);
     printGoogle();
+
     //this section should be deleted after fetch is active
 
   }
