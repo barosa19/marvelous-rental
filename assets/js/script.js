@@ -45,10 +45,10 @@ function getRentalCoordsArray () {
 function fetchRentalData() {
 
   // temporarily use tmpRentalArray
-  if (tmpRentalArray) {
-    rentalArray = tmpRentalArray;
-    return;
-  }
+  // if (tmpRentalArray) {
+  //   rentalArray = tmpRentalArray;
+  //   return;
+  // }
   // the above should be removed when we're live with fetch
 
   const options = {
