@@ -3,6 +3,7 @@ var googleMapsAPI = 'AIzaSyAaJMDcgb5WJX0pY6sQMJdC4ZNVlyYzZkk'
 var locationsName = [];
 var locationsArray = []
 var iconURL = [];
+var rentalCords = getRentalCoordsArray();
 
 function initMap(loc) {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -14,8 +15,8 @@ function initMap(loc) {
     disableAutoPan: true,
   });
 
-  // Add some markers to the map.
-  const markers = locationsArray.map((position, i) => {
+  // Add some furniture markers to the map.
+  const furnitureMarkers = locationsArray.map((position, i) => {
     const marker = new google.maps.Marker({
       position,
       icon: iconURL[i],
@@ -30,9 +31,32 @@ function initMap(loc) {
     });
     return marker;
   });
+  
+const image= {
+  url: 'https://cdn-icons-png.flaticon.com/64/188/188473.png',
+}
+
+  const rentalMarkers = rentalCords.map((position, i) => {
+    const marker = new google.maps.Marker({
+      position,
+      icon: image
+    });
+
+    // markers can only be keyboard focusable when they have click listeners
+    // open info window when marker is clicked
+    const label = locationsName[i]
+    marker.addListener("click", () => {
+      infoWindow.setContent(label);
+      infoWindow.open(map, marker);
+    });
+    return marker;
+  });
+
+  
 
   // Add a marker clusterer to manage the markers.
-  const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+  const markerClusterFurniture = new markerClusterer.MarkerClusterer({ map, markers:furnitureMarkers });
+  const markerClusterRental = new markerClusterer.MarkerClusterer({ map, markers:rentalMarkers });
 }
 
 function loadGoogle(googleRealtorZip) {
