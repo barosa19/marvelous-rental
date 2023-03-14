@@ -6,7 +6,7 @@ var iconURL = [];
 
 function initMap(loc) {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 3,
+    zoom: 10,
     center: loc, //TODO: need to decide what is center
   });
   const infoWindow = new google.maps.InfoWindow({
@@ -68,6 +68,7 @@ function loadGoogle(googleRealtorZip) {
 function printGoogle(obj) {
   var furnitureEl = document.querySelector('.furniture')
   furnitureEl.textContent = ""
+  locationsArray = []
   var listings = obj.results
   for (i = 0; i < 10; i++) {
     var furnitureList = listings[i];
@@ -122,6 +123,7 @@ function printGoogle(obj) {
     furnitureEl.appendChild(cardDiv);
   }
   initMap(locationsArray[1]);
+  console.log(locationsArray)
 }
 function loadFurnitureData() {
   //load previous fetch objects from localStorage
