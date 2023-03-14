@@ -16,6 +16,19 @@ var realtorNumResults = "&limit=10";
 //key for call to bing API
 var bingAPIKey = 'AiG4EPc6Fx1YkYlJcKu0BI-b5jWafgdxk4pQkefyU5iNYFa2wn0x24qyz8v4BY1d';
 
+function getRentalCoordsArray () {
+  var rentCoordsArray =[];
+  for (var i=0; i< rentalArray.length; i++){
+    var lat = rentalArray[i].latitude;
+    var lng = rentalArray[i].longitude;
+    var coordsObj = {"lat": lat,
+                    "lng": lng}
+    rentCoordsArray.push(coordsObj);
+  }
+  // console.log(rentCoordsArray);
+  return rentCoordsArray;
+}
+
 // fetch realtor API data
 function fetchRentalData() {
 
@@ -98,12 +111,12 @@ function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArr
     //create card
     var cardDiv = document.createElement("div");
     cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-7");
+    
     //create card-section
     var cardSection = document.createElement("div");
-
     cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
-    cardSection.setAttribute("id", `address${i}`);
-    var r = rentalArray[i]
+    cardSection.setAttribute("id", `addressR${i}`);
+    var r = rentalArray[i];
 
     var curAddress = `${r.addressLine1}<br>${r.city}, ${r.state} ${r.zipCode}`;
     // console.log("current address is:", curAddress);
@@ -120,7 +133,10 @@ function displayRentalData(currentElem, currentArray) { // rentalElem, rentalArr
     var streetViewURL = getStreetView(getStreetViewInput);
     // console.log(streetViewURL);
     cardImg.setAttribute("src", streetViewURL);
-    cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/rental01.png'");
+    // cardImg.setAttribute("onerror", "javascript:this.src='./assets/icons/rental01.png'");
+    cardImg.setAttribute("onerror", "this.onerror=null;this.src='./assets/icons/rental01.png'");
+
+    // "this.onerror=null;this.src='missing.gif';"
 
     cardImg.setAttribute("alt", "rental property");
     //create card-info
