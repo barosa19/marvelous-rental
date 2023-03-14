@@ -4,7 +4,9 @@ var locationsName = [];
 var locationsArray = []
 var iconURL = [];
 var rentalCords = getRentalCoordsArray();
+var rentalAddress = getRentalAddressArray();
 
+//creates Google Maps
 function initMap(loc) {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 10,
@@ -21,8 +23,6 @@ function initMap(loc) {
       position,
       icon: iconURL[i],
     });
-
-    // markers can only be keyboard focusable when they have click listeners
     // open info window when marker is clicked
     const label = locationsName[i]
     marker.addListener("click", () => {
@@ -31,20 +31,18 @@ function initMap(loc) {
     });
     return marker;
   });
-  
-const image= {
-  url: 'https://cdn-icons-png.flaticon.com/64/188/188473.png',
-}
 
+  const image = {
+    url: 'https://cdn-icons-png.flaticon.com/64/188/188473.png',
+  }
+  // Add some rental markers to the map.
   const rentalMarkers = rentalCords.map((position, i) => {
     const marker = new google.maps.Marker({
       position,
       icon: image
     });
-
-    // markers can only be keyboard focusable when they have click listeners
     // open info window when marker is clicked
-    const label = locationsName[i]
+    const label = rentalAddress[i]
     marker.addListener("click", () => {
       infoWindow.setContent(label);
       infoWindow.open(map, marker);
@@ -52,43 +50,43 @@ const image= {
     return marker;
   });
 
-  
-
   // Add a marker clusterer to manage the markers.
-  const markerClusterFurniture = new markerClusterer.MarkerClusterer({ map, markers:furnitureMarkers });
-  const markerClusterRental = new markerClusterer.MarkerClusterer({ map, markers:rentalMarkers });
+  const markerClusterFurniture = new markerClusterer.MarkerClusterer({ map, markers: furnitureMarkers });
+  const markerClusterRental = new markerClusterer.MarkerClusterer({ map, markers: rentalMarkers });
 }
 
+//fetches data and saves object to local storage
 function loadGoogle(googleRealtorZip) {
   // SAVE API calls
   /*   if (googleTempOBJ) {
       googleOBJ = googleTempOBJ;
       return;
     } */
-  
-    console.log("realtorZip is:", realtorZip);
-    if (!googleRealtorZip) {
-      return;
-    }
-    var googleZipcode = googleRealtorZip.split("=")[1];
-    var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${googleZipcode}&key=${googleMapsAPI}&libraries=places`
+
+  console.log("realtorZip is:", realtorZip);
+  if (!googleRealtorZip) {
+    return;
+  }
+  var googleZipcode = googleRealtorZip.split("=")[1];
+  var googleURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=furniture_store+${googleZipcode}&key=${googleMapsAPI}&libraries=places`
   console.log(googleURL)
-  
-    fetch(googleURL)
+
+  fetch(googleURL)
     .then(function (response) {
       if (!response.ok) {
         console.log("error")
       }
-        return response.json()
-      })
-      .then(function (data) {
-        googleOBJ = data
-        console.log(googleOBJ)
-        printGoogle(googleOBJ)
-        localStorage.setItem("googleOBJ", JSON.stringify(googleOBJ))
-      })
-  }
+      return response.json()
+    })
+    .then(function (data) {
+      googleOBJ = data
+      console.log(googleOBJ)
+      printGoogle(googleOBJ)
+      localStorage.setItem("googleOBJ", JSON.stringify(googleOBJ))
+    })
+}
 
+//prints list of furniture stores near submitted zip code
 function printGoogle(obj) {
   var furnitureEl = document.querySelector('.furniture')
   furnitureEl.textContent = ""
@@ -150,16 +148,18 @@ function printGoogle(obj) {
   initMap(locationsArray[1]);
   console.log(locationsArray)
 }
+
+//loads list of furniture stores for previous zipcode from local storage
 function loadFurnitureData() {
   //load previous fetch objects from localStorage
   googleOBJ = localStorage.getItem('googleOBJ');
-  
+
   //if we have stored content, load it
   if (googleOBJ) {
     console.log("loading stored furniture data");
-    googleOBJ= JSON.parse(googleOBJ);
+    googleOBJ = JSON.parse(googleOBJ);
     printGoogle(googleOBJ);
-    
+
   } else {
     console.log("no data in localStorage for furniture");
   }
