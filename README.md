@@ -2,16 +2,13 @@
 
 ## Description
 
-This website is a weather dashboard to display the current weather for a user-searched sity as well as a 5 day forecast. My aim to showcase my ability to use HTML, CSS, Javascript, Bootstrap, and 3rd party APIs to create a weather dashboard that can also save a clickable search history to conveniently reload the weather of locations of interest. This site solves my need to help users keep track of the weather at their favorite locations with values that persist even if the browser is closed. During this process I learned about using API call to fetch data from third party entities. I also sharpened my use of debugging tools such as debugger, developer tools, and 'console.log'.
+This website was designed for first time home-owners. It takes in a zip code and then displays available homes and apartments for that zip code on the left while providing nearby furniture stores on the right. It also provides the addresses of said locaztion as well as a map from Google to mark the locations of each place of interest. The aim was to work together on a large project in our class for the first time with several other developers. During this process we had to learn how to divide and conquer in order to collaboratively produce a final product. There was very little restrictions for the assignment only that we had to make use of multiple APIs to create a useful product. We had the freedom to design everything from aesthetics to functionality.
 
 ## Usage
 
 This website has been tested to be functional on Chrome, MS Edge, Brave, Samsung Galaxy, and iPhone. 
 
-The site is accessable here: <https://jaminhlo.github.io/weather-dash/>
-
-![weather dash displaying weather as well as a search history](assets/images/wd-ss01.jpg)
-![weather dash on mobile](assets/images/wd-ss02.jpg)
+The site is accessable here: <https://barosa19.github.io/marvelous-rental/>
 
 ## Credits
 
