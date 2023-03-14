@@ -129,12 +129,12 @@ function loadFurnitureData() {
   
   //if we have stored content, load it
   if (googleOBJ) {
-    console.log("loading stored data");
+    console.log("loading stored furniture data");
     googleOBJ= JSON.parse(googleOBJ);
     printGoogle(googleOBJ);
     
   } else {
-    console.log("no data in localStorage");
+    console.log("no data in localStorage for furniture");
   }
 }
 
