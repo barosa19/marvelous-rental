@@ -5,6 +5,7 @@
 This website was designed for first time home-owners. It takes in a zip code and then displays available homes and apartments for that zip code on the left while providing nearby furniture stores on the right. It also provides the addresses of said locaztion as well as a map from Google to mark the locations of each place of interest. The aim was to work together on a large project in our class for the first time with several other developers. During this process we had to learn how to divide and conquer in order to collaboratively produce a final product. There was very little restrictions for the assignment only that we had to make use of multiple APIs to create a useful product. We had the freedom to design everything from aesthetics to functionality.
 
 ## Usage
+It is necessary to download this extension for usage: https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino/related
 
 This website has been tested to be functional on Chrome, MS Edge, Brave, Samsung Galaxy, and iPhone. 
 
