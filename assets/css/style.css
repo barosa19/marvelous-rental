@@ -57,6 +57,10 @@ body {
     flex-direction: column;
 }
 
+.card:hover {
+    border:2px solid red;
+}
+
 .card-section {
     padding: 0.3rem;
 }

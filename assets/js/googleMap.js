@@ -87,8 +87,9 @@ function printGoogle(obj) {
     cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
     cardSection.setAttribute("id", `addressG${i}`);
     //set store address to cardSection's innerHTML
+    var storeName = furnitureList.name;
     var storeAddress = furnitureList.formatted_address;
-    cardSection.innerHTML = storeAddress;
+    cardSection.innerHTML = `${storeName}<br>${storeAddress}`; //
 
     //create card-stats
     var cardStats = document.createElement("div");
