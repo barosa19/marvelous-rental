@@ -112,8 +112,9 @@ function printGoogle(obj) {
     cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
     cardSection.setAttribute("id", `addressG${i}`);
     //set store address to cardSection's innerHTML
+    var storeName = furnitureList.name;
     var storeAddress = furnitureList.formatted_address;
-    cardSection.innerHTML = storeAddress;
+    cardSection.innerHTML = `${storeName}<br>${storeAddress}`; //
 
     //create card-stats
     var cardStats = document.createElement("div");
@@ -155,12 +156,12 @@ function loadFurnitureData() {
   
   //if we have stored content, load it
   if (googleOBJ) {
-    console.log("loading stored data");
+    console.log("loading stored furniture data");
     googleOBJ= JSON.parse(googleOBJ);
     printGoogle(googleOBJ);
     
   } else {
-    console.log("no data in localStorage");
+    console.log("no data in localStorage for furniture");
   }
 }
 

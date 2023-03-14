@@ -180,4 +180,4 @@ function loadBingData (){
     }
 }
 
-loadBingData();
+// loadBingData();
