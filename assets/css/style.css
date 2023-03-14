@@ -98,10 +98,11 @@ body {
 
 
 
-
-
-
 #furniture {
     display: flex;
 
+}
+
+.card-section:hover {
+    background-color: #93ceff;
 }
