@@ -36,7 +36,8 @@ function initMap(loc) {
     url: 'https://cdn-icons-png.flaticon.com/64/188/188473.png',
   }
   // Add some rental markers to the map.
-  const rentalMarkers = rentalCords.map((position, i) => {
+  var rentalArray = rentalCords
+  const rentalMarkers = rentalArray.map((position, i) => {
     const marker = new google.maps.Marker({
       position,
       icon: image

@@ -209,9 +209,8 @@ zipFormElem.addEventListener('submit', function (event) {
     displayRentalData(rentalElem, rentalArray);
     console.log(rentalArray);
     loadGoogle(realtorZip);
-
     //this section should be deleted after fetch is active
-
+    setInterval(function(){location.reload()},500)
   }
   else {
     console.log("not a number");
