@@ -16,6 +16,18 @@ var realtorNumResults = "&limit=10";
 //key for call to bing API
 var bingAPIKey = 'AiG4EPc6Fx1YkYlJcKu0BI-b5jWafgdxk4pQkefyU5iNYFa2wn0x24qyz8v4BY1d';
 
+//return an array of address strings
+function getRentalAddressArray () {
+  var rentAddressArray = [];
+  for (var i=0;i< rentalArray.length; i++){
+    var curAddress = rentalArray[i].formattedAddress;
+    rentAddressArray.push(curAddress);
+  }
+  return rentAddressArray;
+}
+
+
+//return an array of rental coordinate objects
 function getRentalCoordsArray () {
   var rentCoordsArray =[];
   for (var i=0; i< rentalArray.length; i++){
