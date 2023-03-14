@@ -146,7 +146,6 @@ function printGoogle(obj) {
     furnitureEl.appendChild(cardDiv);
   }
   initMap(locationsArray[1]);
-  console.log(locationsArray)
 }
 
 //loads list of furniture stores for previous zipcode from local storage
@@ -160,9 +159,12 @@ function loadFurnitureData() {
     googleOBJ = JSON.parse(googleOBJ);
     printGoogle(googleOBJ);
 
+
   } else {
     console.log("no data in localStorage for furniture");
   }
 }
 
-loadFurnitureData();
+document.addEventListener("DOMContentLoaded", () => {
+  loadFurnitureData();
+});
