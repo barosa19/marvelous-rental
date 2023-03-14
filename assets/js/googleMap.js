@@ -78,11 +78,11 @@ function printGoogle(obj) {
     locationsArray.push(storeLoc);
     var storeIcon = furnitureList.icon;
     iconURL.push(storeIcon);
-    
+
     //create card
     var cardDiv = document.createElement("div");
     cardDiv.setAttribute("class", "card is-family-code is-flex-direction-column m-3 has-background-info-light is-size-7");
-    
+
     //create card-section
     var cardSection = document.createElement("div");
     cardSection.setAttribute("class", "card-section has-text-weight-semibold  has-text-info-dark is-size-6");
@@ -108,7 +108,7 @@ function printGoogle(obj) {
       cardImg.setAttribute("src", "./assets/icons/new-store.png");
     }
     cardImg.setAttribute("alt", "rental property");
-    
+
     //create card-info placeholder for formating purposes
     var cardInfo = document.createElement("div");
     cardInfo.setAttribute("class", "card-info");
