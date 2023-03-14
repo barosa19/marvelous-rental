@@ -47,7 +47,6 @@ function fetchRentalData() {
     }
   };
   //fetch data from API
-  // console.log(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`);
   fetch(`https://realty-mole-property-api.p.rapidapi.com/${realtorSearchType}?${realtorAPIKey}${realtorCity}${realtorState}${realtorZip}&status=Active${realtorNumResults}`, options)
     .then(function (response) {
       if (!response.ok) {
@@ -67,7 +66,7 @@ function fetchRentalData() {
 
       //save new array
       saveRentalData();
-      displayRentalData();
+      displayRentalData(rentalElem, rentalArray);
       console.log(rentalArray);
       loadGoogle(realtorZip);
 
@@ -171,12 +170,12 @@ function loadRentalData() {
   rentalArray = localStorage.getItem('rental-array');
   //if we have stored content, load it
   if (rentalArray) {
-    console.log("loading stored data");
+    console.log("loading stored data for rentals");
     rentalArray = JSON.parse(rentalArray);
     displayRentalData(rentalElem, rentalArray);
     // loadGoogle(realtorZip);
   } else {
-    console.log("no data in localStorage");
+    console.log("no data in localStorage for rentals");
   }
 
 }
